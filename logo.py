@@ -94,7 +94,8 @@ lexer = lex.lex()
 
 # l'axiome: 
 def p_expression(p):
-    'expression : expr'
+    '''expression : expression expr
+                | expr'''
     pass
 
 def p_expr(p):
@@ -119,6 +120,8 @@ def p_error(p):
 
 # instantiation de l'analyseur syntaxique
 parser = yacc.yacc()
+
+parser.parse(program)
 
 
 # partie finale du fichier svg

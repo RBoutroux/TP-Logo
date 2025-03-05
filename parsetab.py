@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BACKWARD COLOR COLORVALUE DOWN FORWARD LEFT NUMBER PEN RIGHT UPexpression : exprexpr : FORWARD NUMBER\n            | BACKWARD NUMBER\n            | LEFT NUMBER\n            | RIGHT NUMBER\n            | PEN UP\n            | PEN DOWN\n            | COLOR COLORVALUE\n    '
+_lr_signature = 'BACKWARD COLOR COLORVALUE DOWN FORWARD LEFT NUMBER PEN RIGHT UPexpression : expression expr\n                | exprexpr : FORWARD NUMBER\n            | BACKWARD NUMBER\n            | LEFT NUMBER\n            | RIGHT NUMBER\n            | PEN UP\n            | PEN DOWN\n            | COLOR COLORVALUE\n    '
     
-_lr_action_items = {'FORWARD':([0,],[3,]),'BACKWARD':([0,],[4,]),'LEFT':([0,],[5,]),'RIGHT':([0,],[6,]),'PEN':([0,],[7,]),'COLOR':([0,],[8,]),'$end':([1,2,9,10,11,12,13,14,15,],[0,-1,-2,-3,-4,-5,-6,-7,-8,]),'NUMBER':([3,4,5,6,],[9,10,11,12,]),'UP':([7,],[13,]),'DOWN':([7,],[14,]),'COLORVALUE':([8,],[15,]),}
+_lr_action_items = {'FORWARD':([0,1,2,9,10,11,12,13,14,15,16,],[3,3,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'BACKWARD':([0,1,2,9,10,11,12,13,14,15,16,],[4,4,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'LEFT':([0,1,2,9,10,11,12,13,14,15,16,],[5,5,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'RIGHT':([0,1,2,9,10,11,12,13,14,15,16,],[6,6,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'PEN':([0,1,2,9,10,11,12,13,14,15,16,],[7,7,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'COLOR':([0,1,2,9,10,11,12,13,14,15,16,],[8,8,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'$end':([1,2,9,10,11,12,13,14,15,16,],[0,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'NUMBER':([3,4,5,6,],[10,11,12,13,]),'UP':([7,],[14,]),'DOWN':([7,],[15,]),'COLORVALUE':([8,],[16,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,],[1,]),'expr':([0,],[2,]),}
+_lr_goto_items = {'expression':([0,],[1,]),'expr':([0,1,],[2,9,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,12 +27,13 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expr','expression',1,'p_expression','logo.py',97),
-  ('expr -> FORWARD NUMBER','expr',2,'p_expr','logo.py',101),
-  ('expr -> BACKWARD NUMBER','expr',2,'p_expr','logo.py',102),
-  ('expr -> LEFT NUMBER','expr',2,'p_expr','logo.py',103),
-  ('expr -> RIGHT NUMBER','expr',2,'p_expr','logo.py',104),
-  ('expr -> PEN UP','expr',2,'p_expr','logo.py',105),
-  ('expr -> PEN DOWN','expr',2,'p_expr','logo.py',106),
-  ('expr -> COLOR COLORVALUE','expr',2,'p_expr','logo.py',107),
+  ('expression -> expression expr','expression',2,'p_expression','logo.py',97),
+  ('expression -> expr','expression',1,'p_expression','logo.py',98),
+  ('expr -> FORWARD NUMBER','expr',2,'p_expr','logo.py',102),
+  ('expr -> BACKWARD NUMBER','expr',2,'p_expr','logo.py',103),
+  ('expr -> LEFT NUMBER','expr',2,'p_expr','logo.py',104),
+  ('expr -> RIGHT NUMBER','expr',2,'p_expr','logo.py',105),
+  ('expr -> PEN UP','expr',2,'p_expr','logo.py',106),
+  ('expr -> PEN DOWN','expr',2,'p_expr','logo.py',107),
+  ('expr -> COLOR COLORVALUE','expr',2,'p_expr','logo.py',108),
 ]
