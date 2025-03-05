@@ -40,6 +40,9 @@ t_PEN = r'pen'
 t_UP = r'up'
 t_DOWN = r'down'
 t_COLOR = r'color'
+t_REPEAT = r'repeat'
+t_LBRACKET = r'\['
+t_RBRACKET = r'\]'
 
 def t_NUMBER(t):
     r'-?[0-9]+' # on peut aussi écrire r'\d+'
@@ -110,19 +113,23 @@ def p_expression(p):
         instr.code()
 
 def p_expr(p):
-    '''expr : expr expr2
-            | expr2'''
+    '''expr : expr expr_repeat
+            | expr_repeat'''
     if len(p) == 3:
         p[0] = p[1] + p[2]
     else:
         p[0] = p[1]
 
 
-# def p_expr_repeat(p):
-#     '''expr : REPEAT NUMBER LBRACKET expression RBRACKET,
-#             | expr2'''
-
-#     for i in range(p[2]):
+def p_expr_repeat(p):
+    '''expr_repeat : REPEAT NUMBER LBRACKET expr RBRACKET
+            | expr2'''
+    p[0] = []
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        for _ in range(p[2]):
+            p[0] += p[4]
         
 
 def p_expr2(p):

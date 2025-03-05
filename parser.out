@@ -1,46 +1,43 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
-Unused terminals:
-
-    LBRACKET
-    RBRACKET
-    REPEAT
-
 Grammar
 
 Rule 0     S' -> expression
 Rule 1     expression -> expr
-Rule 2     expr -> expr expr2
-Rule 3     expr -> expr2
-Rule 4     expr2 -> FORWARD NUMBER
-Rule 5     expr2 -> BACKWARD NUMBER
-Rule 6     expr2 -> LEFT NUMBER
-Rule 7     expr2 -> RIGHT NUMBER
-Rule 8     expr2 -> PEN UP
-Rule 9     expr2 -> PEN DOWN
-Rule 10    expr2 -> PEN COLOR COLORVALUE
+Rule 2     expr -> expr expr_repeat
+Rule 3     expr -> expr_repeat
+Rule 4     expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET
+Rule 5     expr_repeat -> expr2
+Rule 6     expr2 -> FORWARD NUMBER
+Rule 7     expr2 -> BACKWARD NUMBER
+Rule 8     expr2 -> LEFT NUMBER
+Rule 9     expr2 -> RIGHT NUMBER
+Rule 10    expr2 -> PEN UP
+Rule 11    expr2 -> PEN DOWN
+Rule 12    expr2 -> PEN COLOR COLORVALUE
 
 Terminals, with rules where they appear
 
-BACKWARD             : 5
-COLOR                : 10
-COLORVALUE           : 10
-DOWN                 : 9
-FORWARD              : 4
-LBRACKET             : 
-LEFT                 : 6
-NUMBER               : 4 5 6 7
-PEN                  : 8 9 10
-RBRACKET             : 
-REPEAT               : 
-RIGHT                : 7
-UP                   : 8
+BACKWARD             : 7
+COLOR                : 12
+COLORVALUE           : 12
+DOWN                 : 11
+FORWARD              : 6
+LBRACKET             : 4
+LEFT                 : 8
+NUMBER               : 4 6 7 8 9
+PEN                  : 10 11 12
+RBRACKET             : 4
+REPEAT               : 4
+RIGHT                : 9
+UP                   : 10
 error                : 
 
 Nonterminals, with rules where they appear
 
-expr                 : 1 2
-expr2                : 2 3
+expr                 : 1 2 4
+expr2                : 5
+expr_repeat          : 2 3
 expression           : 0
 
 Parsing method: LALR
@@ -49,25 +46,29 @@ state 0
 
     (0) S' -> . expression
     (1) expression -> . expr
-    (2) expr -> . expr expr2
-    (3) expr -> . expr2
-    (4) expr2 -> . FORWARD NUMBER
-    (5) expr2 -> . BACKWARD NUMBER
-    (6) expr2 -> . LEFT NUMBER
-    (7) expr2 -> . RIGHT NUMBER
-    (8) expr2 -> . PEN UP
-    (9) expr2 -> . PEN DOWN
-    (10) expr2 -> . PEN COLOR COLORVALUE
+    (2) expr -> . expr expr_repeat
+    (3) expr -> . expr_repeat
+    (4) expr_repeat -> . REPEAT NUMBER LBRACKET expr RBRACKET
+    (5) expr_repeat -> . expr2
+    (6) expr2 -> . FORWARD NUMBER
+    (7) expr2 -> . BACKWARD NUMBER
+    (8) expr2 -> . LEFT NUMBER
+    (9) expr2 -> . RIGHT NUMBER
+    (10) expr2 -> . PEN UP
+    (11) expr2 -> . PEN DOWN
+    (12) expr2 -> . PEN COLOR COLORVALUE
 
-    FORWARD         shift and go to state 4
-    BACKWARD        shift and go to state 5
-    LEFT            shift and go to state 6
-    RIGHT           shift and go to state 7
-    PEN             shift and go to state 8
+    REPEAT          shift and go to state 4
+    FORWARD         shift and go to state 6
+    BACKWARD        shift and go to state 7
+    LEFT            shift and go to state 8
+    RIGHT           shift and go to state 9
+    PEN             shift and go to state 10
 
     expression                     shift and go to state 1
     expr                           shift and go to state 2
-    expr2                          shift and go to state 3
+    expr_repeat                    shift and go to state 3
+    expr2                          shift and go to state 5
 
 state 1
 
@@ -78,174 +79,289 @@ state 1
 state 2
 
     (1) expression -> expr .
-    (2) expr -> expr . expr2
-    (4) expr2 -> . FORWARD NUMBER
-    (5) expr2 -> . BACKWARD NUMBER
-    (6) expr2 -> . LEFT NUMBER
-    (7) expr2 -> . RIGHT NUMBER
-    (8) expr2 -> . PEN UP
-    (9) expr2 -> . PEN DOWN
-    (10) expr2 -> . PEN COLOR COLORVALUE
+    (2) expr -> expr . expr_repeat
+    (4) expr_repeat -> . REPEAT NUMBER LBRACKET expr RBRACKET
+    (5) expr_repeat -> . expr2
+    (6) expr2 -> . FORWARD NUMBER
+    (7) expr2 -> . BACKWARD NUMBER
+    (8) expr2 -> . LEFT NUMBER
+    (9) expr2 -> . RIGHT NUMBER
+    (10) expr2 -> . PEN UP
+    (11) expr2 -> . PEN DOWN
+    (12) expr2 -> . PEN COLOR COLORVALUE
 
     $end            reduce using rule 1 (expression -> expr .)
-    FORWARD         shift and go to state 4
-    BACKWARD        shift and go to state 5
-    LEFT            shift and go to state 6
-    RIGHT           shift and go to state 7
-    PEN             shift and go to state 8
+    REPEAT          shift and go to state 4
+    FORWARD         shift and go to state 6
+    BACKWARD        shift and go to state 7
+    LEFT            shift and go to state 8
+    RIGHT           shift and go to state 9
+    PEN             shift and go to state 10
 
-    expr2                          shift and go to state 9
+    expr_repeat                    shift and go to state 11
+    expr2                          shift and go to state 5
 
 state 3
 
-    (3) expr -> expr2 .
+    (3) expr -> expr_repeat .
 
-    FORWARD         reduce using rule 3 (expr -> expr2 .)
-    BACKWARD        reduce using rule 3 (expr -> expr2 .)
-    LEFT            reduce using rule 3 (expr -> expr2 .)
-    RIGHT           reduce using rule 3 (expr -> expr2 .)
-    PEN             reduce using rule 3 (expr -> expr2 .)
-    $end            reduce using rule 3 (expr -> expr2 .)
+    REPEAT          reduce using rule 3 (expr -> expr_repeat .)
+    FORWARD         reduce using rule 3 (expr -> expr_repeat .)
+    BACKWARD        reduce using rule 3 (expr -> expr_repeat .)
+    LEFT            reduce using rule 3 (expr -> expr_repeat .)
+    RIGHT           reduce using rule 3 (expr -> expr_repeat .)
+    PEN             reduce using rule 3 (expr -> expr_repeat .)
+    $end            reduce using rule 3 (expr -> expr_repeat .)
+    RBRACKET        reduce using rule 3 (expr -> expr_repeat .)
 
 
 state 4
 
-    (4) expr2 -> FORWARD . NUMBER
-
-    NUMBER          shift and go to state 10
-
-
-state 5
-
-    (5) expr2 -> BACKWARD . NUMBER
-
-    NUMBER          shift and go to state 11
-
-
-state 6
-
-    (6) expr2 -> LEFT . NUMBER
+    (4) expr_repeat -> REPEAT . NUMBER LBRACKET expr RBRACKET
 
     NUMBER          shift and go to state 12
 
 
-state 7
+state 5
 
-    (7) expr2 -> RIGHT . NUMBER
+    (5) expr_repeat -> expr2 .
+
+    REPEAT          reduce using rule 5 (expr_repeat -> expr2 .)
+    FORWARD         reduce using rule 5 (expr_repeat -> expr2 .)
+    BACKWARD        reduce using rule 5 (expr_repeat -> expr2 .)
+    LEFT            reduce using rule 5 (expr_repeat -> expr2 .)
+    RIGHT           reduce using rule 5 (expr_repeat -> expr2 .)
+    PEN             reduce using rule 5 (expr_repeat -> expr2 .)
+    $end            reduce using rule 5 (expr_repeat -> expr2 .)
+    RBRACKET        reduce using rule 5 (expr_repeat -> expr2 .)
+
+
+state 6
+
+    (6) expr2 -> FORWARD . NUMBER
 
     NUMBER          shift and go to state 13
 
 
+state 7
+
+    (7) expr2 -> BACKWARD . NUMBER
+
+    NUMBER          shift and go to state 14
+
+
 state 8
 
-    (8) expr2 -> PEN . UP
-    (9) expr2 -> PEN . DOWN
-    (10) expr2 -> PEN . COLOR COLORVALUE
+    (8) expr2 -> LEFT . NUMBER
 
-    UP              shift and go to state 14
-    DOWN            shift and go to state 15
-    COLOR           shift and go to state 16
+    NUMBER          shift and go to state 15
 
 
 state 9
 
-    (2) expr -> expr expr2 .
+    (9) expr2 -> RIGHT . NUMBER
 
-    FORWARD         reduce using rule 2 (expr -> expr expr2 .)
-    BACKWARD        reduce using rule 2 (expr -> expr expr2 .)
-    LEFT            reduce using rule 2 (expr -> expr expr2 .)
-    RIGHT           reduce using rule 2 (expr -> expr expr2 .)
-    PEN             reduce using rule 2 (expr -> expr expr2 .)
-    $end            reduce using rule 2 (expr -> expr expr2 .)
+    NUMBER          shift and go to state 16
 
 
 state 10
 
-    (4) expr2 -> FORWARD NUMBER .
+    (10) expr2 -> PEN . UP
+    (11) expr2 -> PEN . DOWN
+    (12) expr2 -> PEN . COLOR COLORVALUE
 
-    FORWARD         reduce using rule 4 (expr2 -> FORWARD NUMBER .)
-    BACKWARD        reduce using rule 4 (expr2 -> FORWARD NUMBER .)
-    LEFT            reduce using rule 4 (expr2 -> FORWARD NUMBER .)
-    RIGHT           reduce using rule 4 (expr2 -> FORWARD NUMBER .)
-    PEN             reduce using rule 4 (expr2 -> FORWARD NUMBER .)
-    $end            reduce using rule 4 (expr2 -> FORWARD NUMBER .)
+    UP              shift and go to state 17
+    DOWN            shift and go to state 18
+    COLOR           shift and go to state 19
 
 
 state 11
 
-    (5) expr2 -> BACKWARD NUMBER .
+    (2) expr -> expr expr_repeat .
 
-    FORWARD         reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
-    BACKWARD        reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
-    LEFT            reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
-    RIGHT           reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
-    PEN             reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
-    $end            reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
+    REPEAT          reduce using rule 2 (expr -> expr expr_repeat .)
+    FORWARD         reduce using rule 2 (expr -> expr expr_repeat .)
+    BACKWARD        reduce using rule 2 (expr -> expr expr_repeat .)
+    LEFT            reduce using rule 2 (expr -> expr expr_repeat .)
+    RIGHT           reduce using rule 2 (expr -> expr expr_repeat .)
+    PEN             reduce using rule 2 (expr -> expr expr_repeat .)
+    $end            reduce using rule 2 (expr -> expr expr_repeat .)
+    RBRACKET        reduce using rule 2 (expr -> expr expr_repeat .)
 
 
 state 12
 
-    (6) expr2 -> LEFT NUMBER .
+    (4) expr_repeat -> REPEAT NUMBER . LBRACKET expr RBRACKET
 
-    FORWARD         reduce using rule 6 (expr2 -> LEFT NUMBER .)
-    BACKWARD        reduce using rule 6 (expr2 -> LEFT NUMBER .)
-    LEFT            reduce using rule 6 (expr2 -> LEFT NUMBER .)
-    RIGHT           reduce using rule 6 (expr2 -> LEFT NUMBER .)
-    PEN             reduce using rule 6 (expr2 -> LEFT NUMBER .)
-    $end            reduce using rule 6 (expr2 -> LEFT NUMBER .)
+    LBRACKET        shift and go to state 20
 
 
 state 13
 
-    (7) expr2 -> RIGHT NUMBER .
+    (6) expr2 -> FORWARD NUMBER .
 
-    FORWARD         reduce using rule 7 (expr2 -> RIGHT NUMBER .)
-    BACKWARD        reduce using rule 7 (expr2 -> RIGHT NUMBER .)
-    LEFT            reduce using rule 7 (expr2 -> RIGHT NUMBER .)
-    RIGHT           reduce using rule 7 (expr2 -> RIGHT NUMBER .)
-    PEN             reduce using rule 7 (expr2 -> RIGHT NUMBER .)
-    $end            reduce using rule 7 (expr2 -> RIGHT NUMBER .)
+    REPEAT          reduce using rule 6 (expr2 -> FORWARD NUMBER .)
+    FORWARD         reduce using rule 6 (expr2 -> FORWARD NUMBER .)
+    BACKWARD        reduce using rule 6 (expr2 -> FORWARD NUMBER .)
+    LEFT            reduce using rule 6 (expr2 -> FORWARD NUMBER .)
+    RIGHT           reduce using rule 6 (expr2 -> FORWARD NUMBER .)
+    PEN             reduce using rule 6 (expr2 -> FORWARD NUMBER .)
+    $end            reduce using rule 6 (expr2 -> FORWARD NUMBER .)
+    RBRACKET        reduce using rule 6 (expr2 -> FORWARD NUMBER .)
 
 
 state 14
 
-    (8) expr2 -> PEN UP .
+    (7) expr2 -> BACKWARD NUMBER .
 
-    FORWARD         reduce using rule 8 (expr2 -> PEN UP .)
-    BACKWARD        reduce using rule 8 (expr2 -> PEN UP .)
-    LEFT            reduce using rule 8 (expr2 -> PEN UP .)
-    RIGHT           reduce using rule 8 (expr2 -> PEN UP .)
-    PEN             reduce using rule 8 (expr2 -> PEN UP .)
-    $end            reduce using rule 8 (expr2 -> PEN UP .)
+    REPEAT          reduce using rule 7 (expr2 -> BACKWARD NUMBER .)
+    FORWARD         reduce using rule 7 (expr2 -> BACKWARD NUMBER .)
+    BACKWARD        reduce using rule 7 (expr2 -> BACKWARD NUMBER .)
+    LEFT            reduce using rule 7 (expr2 -> BACKWARD NUMBER .)
+    RIGHT           reduce using rule 7 (expr2 -> BACKWARD NUMBER .)
+    PEN             reduce using rule 7 (expr2 -> BACKWARD NUMBER .)
+    $end            reduce using rule 7 (expr2 -> BACKWARD NUMBER .)
+    RBRACKET        reduce using rule 7 (expr2 -> BACKWARD NUMBER .)
 
 
 state 15
 
-    (9) expr2 -> PEN DOWN .
+    (8) expr2 -> LEFT NUMBER .
 
-    FORWARD         reduce using rule 9 (expr2 -> PEN DOWN .)
-    BACKWARD        reduce using rule 9 (expr2 -> PEN DOWN .)
-    LEFT            reduce using rule 9 (expr2 -> PEN DOWN .)
-    RIGHT           reduce using rule 9 (expr2 -> PEN DOWN .)
-    PEN             reduce using rule 9 (expr2 -> PEN DOWN .)
-    $end            reduce using rule 9 (expr2 -> PEN DOWN .)
+    REPEAT          reduce using rule 8 (expr2 -> LEFT NUMBER .)
+    FORWARD         reduce using rule 8 (expr2 -> LEFT NUMBER .)
+    BACKWARD        reduce using rule 8 (expr2 -> LEFT NUMBER .)
+    LEFT            reduce using rule 8 (expr2 -> LEFT NUMBER .)
+    RIGHT           reduce using rule 8 (expr2 -> LEFT NUMBER .)
+    PEN             reduce using rule 8 (expr2 -> LEFT NUMBER .)
+    $end            reduce using rule 8 (expr2 -> LEFT NUMBER .)
+    RBRACKET        reduce using rule 8 (expr2 -> LEFT NUMBER .)
 
 
 state 16
 
-    (10) expr2 -> PEN COLOR . COLORVALUE
+    (9) expr2 -> RIGHT NUMBER .
 
-    COLORVALUE      shift and go to state 17
+    REPEAT          reduce using rule 9 (expr2 -> RIGHT NUMBER .)
+    FORWARD         reduce using rule 9 (expr2 -> RIGHT NUMBER .)
+    BACKWARD        reduce using rule 9 (expr2 -> RIGHT NUMBER .)
+    LEFT            reduce using rule 9 (expr2 -> RIGHT NUMBER .)
+    RIGHT           reduce using rule 9 (expr2 -> RIGHT NUMBER .)
+    PEN             reduce using rule 9 (expr2 -> RIGHT NUMBER .)
+    $end            reduce using rule 9 (expr2 -> RIGHT NUMBER .)
+    RBRACKET        reduce using rule 9 (expr2 -> RIGHT NUMBER .)
 
 
 state 17
 
-    (10) expr2 -> PEN COLOR COLORVALUE .
+    (10) expr2 -> PEN UP .
 
-    FORWARD         reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
-    BACKWARD        reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
-    LEFT            reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
-    RIGHT           reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
-    PEN             reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
-    $end            reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
+    REPEAT          reduce using rule 10 (expr2 -> PEN UP .)
+    FORWARD         reduce using rule 10 (expr2 -> PEN UP .)
+    BACKWARD        reduce using rule 10 (expr2 -> PEN UP .)
+    LEFT            reduce using rule 10 (expr2 -> PEN UP .)
+    RIGHT           reduce using rule 10 (expr2 -> PEN UP .)
+    PEN             reduce using rule 10 (expr2 -> PEN UP .)
+    $end            reduce using rule 10 (expr2 -> PEN UP .)
+    RBRACKET        reduce using rule 10 (expr2 -> PEN UP .)
+
+
+state 18
+
+    (11) expr2 -> PEN DOWN .
+
+    REPEAT          reduce using rule 11 (expr2 -> PEN DOWN .)
+    FORWARD         reduce using rule 11 (expr2 -> PEN DOWN .)
+    BACKWARD        reduce using rule 11 (expr2 -> PEN DOWN .)
+    LEFT            reduce using rule 11 (expr2 -> PEN DOWN .)
+    RIGHT           reduce using rule 11 (expr2 -> PEN DOWN .)
+    PEN             reduce using rule 11 (expr2 -> PEN DOWN .)
+    $end            reduce using rule 11 (expr2 -> PEN DOWN .)
+    RBRACKET        reduce using rule 11 (expr2 -> PEN DOWN .)
+
+
+state 19
+
+    (12) expr2 -> PEN COLOR . COLORVALUE
+
+    COLORVALUE      shift and go to state 21
+
+
+state 20
+
+    (4) expr_repeat -> REPEAT NUMBER LBRACKET . expr RBRACKET
+    (2) expr -> . expr expr_repeat
+    (3) expr -> . expr_repeat
+    (4) expr_repeat -> . REPEAT NUMBER LBRACKET expr RBRACKET
+    (5) expr_repeat -> . expr2
+    (6) expr2 -> . FORWARD NUMBER
+    (7) expr2 -> . BACKWARD NUMBER
+    (8) expr2 -> . LEFT NUMBER
+    (9) expr2 -> . RIGHT NUMBER
+    (10) expr2 -> . PEN UP
+    (11) expr2 -> . PEN DOWN
+    (12) expr2 -> . PEN COLOR COLORVALUE
+
+    REPEAT          shift and go to state 4
+    FORWARD         shift and go to state 6
+    BACKWARD        shift and go to state 7
+    LEFT            shift and go to state 8
+    RIGHT           shift and go to state 9
+    PEN             shift and go to state 10
+
+    expr                           shift and go to state 22
+    expr_repeat                    shift and go to state 3
+    expr2                          shift and go to state 5
+
+state 21
+
+    (12) expr2 -> PEN COLOR COLORVALUE .
+
+    REPEAT          reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
+    FORWARD         reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
+    BACKWARD        reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
+    LEFT            reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
+    RIGHT           reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
+    PEN             reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
+    $end            reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
+    RBRACKET        reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
+
+
+state 22
+
+    (4) expr_repeat -> REPEAT NUMBER LBRACKET expr . RBRACKET
+    (2) expr -> expr . expr_repeat
+    (4) expr_repeat -> . REPEAT NUMBER LBRACKET expr RBRACKET
+    (5) expr_repeat -> . expr2
+    (6) expr2 -> . FORWARD NUMBER
+    (7) expr2 -> . BACKWARD NUMBER
+    (8) expr2 -> . LEFT NUMBER
+    (9) expr2 -> . RIGHT NUMBER
+    (10) expr2 -> . PEN UP
+    (11) expr2 -> . PEN DOWN
+    (12) expr2 -> . PEN COLOR COLORVALUE
+
+    RBRACKET        shift and go to state 23
+    REPEAT          shift and go to state 4
+    FORWARD         shift and go to state 6
+    BACKWARD        shift and go to state 7
+    LEFT            shift and go to state 8
+    RIGHT           shift and go to state 9
+    PEN             shift and go to state 10
+
+    expr_repeat                    shift and go to state 11
+    expr2                          shift and go to state 5
+
+state 23
+
+    (4) expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .
+
+    REPEAT          reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
+    FORWARD         reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
+    BACKWARD        reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
+    LEFT            reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
+    RIGHT           reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
+    PEN             reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
+    $end            reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
+    RBRACKET        reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
 
