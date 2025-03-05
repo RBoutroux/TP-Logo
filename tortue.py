@@ -32,7 +32,13 @@ class Turtle:
         self.y += dy
     
     def right(self, angle):
-        self.angle -= angle
+        self.angle += angle
+
+    def set_pen(self, pen):
+        self.pendown = pen
+
+    def set_color(self, color):
+        self.color = color
     # En particulier dans forward, il faudra faire le tracé si le crayon est baissé avec
     # l'instruction suivante :
     # self.output.write(f'<line x1 = "{round(self.x)}" y1 = "{round(self.y)}" x2 = "{round(self.x + dx)}" y2 = "{round(self.y + dy)}" style = "stroke:{self.color}"/>\n')

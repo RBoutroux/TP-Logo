@@ -44,7 +44,7 @@ def t_NUMBER(t):
 
 def t_COLORVALUE(t):
     r'\#([0-9a-fA-F]{6})'
-    t.value = t.value[1:]
+    # t.value = t.value[1:] # on enlève le premier caractère
     return t
 
 # caractères à ignorer: ici espaces, tabulations, saut de lignes
@@ -107,8 +107,21 @@ def p_expr(p):
             | PEN DOWN
             | PEN COLOR COLORVALUE
     '''
-    pass
-
+    if p[1] == 'forward':
+        turtle.forward(p[2])
+    elif p[1] == 'backward':
+        turtle.forward(-p[2])
+    elif p[1] == 'left':
+        turtle.right(-p[2])
+    elif p[1] == 'right':
+        turtle.right(p[2])
+    elif p[1] == 'pen':
+        if p[2] == 'up':
+            turtle.set_pen(False)
+        elif p[2] == 'down':
+            turtle.set_pen(True)
+        elif p[2] == 'color':
+            turtle.set_color(p[3])
 
 # gestion minimaliste des erreurs de syntaxe
 def p_error(p):
