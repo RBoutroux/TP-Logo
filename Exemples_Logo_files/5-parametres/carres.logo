@@ -1,0 +1,46 @@
+to carre2 :x
+    repeat 4
+    [
+        forward :x
+        left 90
+    ]
+    pen up
+    left 45
+    forward 10
+    right 45
+    pen down
+end
+
+to carre :x
+    repeat 4
+    [
+        backward :x
+        left 90
+    ]
+    pen up
+    left 45
+    backward 10
+    right 45
+    pen down
+end
+
+
+pen color #00ff00
+carre 50    
+carre 100
+carre 200
+
+pen up
+left heading
+backward xcor
+right 90
+backward ycor
+forward 300
+left 90
+forward 500
+pen down
+
+pen color #ff0000
+carre2 50    
+carre2 100
+carre2 200

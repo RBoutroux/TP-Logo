@@ -1,0 +1,68 @@
+to inside_ray :x
+    pen color #aaaaaa
+    forward :x
+    
+end
+
+to colored_ray :y
+    right 20
+    forward :y
+end
+
+to reset :x :y
+    pen up
+    backward :y
+    left 20
+    backward :x
+    right 1
+    pen down
+end
+
+to ray :x :y 
+    colored_ray :y
+    reset :x :y
+end
+
+pen color #000000
+repeat 3
+[
+    forward 100
+    left 120
+]
+
+pen up
+backward 150
+pen down
+
+left 15
+forward 185
+
+right 5
+inside_ray 40
+pen color #ff0000
+ray 40 186
+
+inside_ray 41
+pen color #ffa500
+ray 41 186
+
+inside_ray 41
+pen color #ffff00
+ray 41 186
+
+inside_ray 41
+pen color #00ff00
+ray 41 186
+
+inside_ray 42
+pen color #00a5ff
+ray 42 186
+
+inside_ray 42
+pen color #0000ff
+ray 42 186
+
+inside_ray 42
+pen color #460082
+ray 42 186
+

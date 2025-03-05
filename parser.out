@@ -1,0 +1,162 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> expr
+Rule 2     expr -> FORWARD NUMBER
+Rule 3     expr -> BACKWARD NUMBER
+Rule 4     expr -> LEFT NUMBER
+Rule 5     expr -> RIGHT NUMBER
+Rule 6     expr -> PEN UP
+Rule 7     expr -> PEN DOWN
+Rule 8     expr -> COLOR COLORVALUE
+
+Terminals, with rules where they appear
+
+BACKWARD             : 3
+COLOR                : 8
+COLORVALUE           : 8
+DOWN                 : 7
+FORWARD              : 2
+LEFT                 : 4
+NUMBER               : 2 3 4 5
+PEN                  : 6 7
+RIGHT                : 5
+UP                   : 6
+error                : 
+
+Nonterminals, with rules where they appear
+
+expr                 : 1
+expression           : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . expr
+    (2) expr -> . FORWARD NUMBER
+    (3) expr -> . BACKWARD NUMBER
+    (4) expr -> . LEFT NUMBER
+    (5) expr -> . RIGHT NUMBER
+    (6) expr -> . PEN UP
+    (7) expr -> . PEN DOWN
+    (8) expr -> . COLOR COLORVALUE
+
+    FORWARD         shift and go to state 3
+    BACKWARD        shift and go to state 4
+    LEFT            shift and go to state 5
+    RIGHT           shift and go to state 6
+    PEN             shift and go to state 7
+    COLOR           shift and go to state 8
+
+    expression                     shift and go to state 1
+    expr                           shift and go to state 2
+
+state 1
+
+    (0) S' -> expression .
+
+
+
+state 2
+
+    (1) expression -> expr .
+
+    $end            reduce using rule 1 (expression -> expr .)
+
+
+state 3
+
+    (2) expr -> FORWARD . NUMBER
+
+    NUMBER          shift and go to state 9
+
+
+state 4
+
+    (3) expr -> BACKWARD . NUMBER
+
+    NUMBER          shift and go to state 10
+
+
+state 5
+
+    (4) expr -> LEFT . NUMBER
+
+    NUMBER          shift and go to state 11
+
+
+state 6
+
+    (5) expr -> RIGHT . NUMBER
+
+    NUMBER          shift and go to state 12
+
+
+state 7
+
+    (6) expr -> PEN . UP
+    (7) expr -> PEN . DOWN
+
+    UP              shift and go to state 13
+    DOWN            shift and go to state 14
+
+
+state 8
+
+    (8) expr -> COLOR . COLORVALUE
+
+    COLORVALUE      shift and go to state 15
+
+
+state 9
+
+    (2) expr -> FORWARD NUMBER .
+
+    $end            reduce using rule 2 (expr -> FORWARD NUMBER .)
+
+
+state 10
+
+    (3) expr -> BACKWARD NUMBER .
+
+    $end            reduce using rule 3 (expr -> BACKWARD NUMBER .)
+
+
+state 11
+
+    (4) expr -> LEFT NUMBER .
+
+    $end            reduce using rule 4 (expr -> LEFT NUMBER .)
+
+
+state 12
+
+    (5) expr -> RIGHT NUMBER .
+
+    $end            reduce using rule 5 (expr -> RIGHT NUMBER .)
+
+
+state 13
+
+    (6) expr -> PEN UP .
+
+    $end            reduce using rule 6 (expr -> PEN UP .)
+
+
+state 14
+
+    (7) expr -> PEN DOWN .
+
+    $end            reduce using rule 7 (expr -> PEN DOWN .)
+
+
+state 15
+
+    (8) expr -> COLOR COLORVALUE .
+
+    $end            reduce using rule 8 (expr -> COLOR COLORVALUE .)
+

@@ -1,0 +1,107 @@
+pen up
+backward 250
+pen   down
+
+forward 100
+left 90
+forward 20
+left 90
+forward 80
+right 90
+forward 80
+left 90
+forward 20
+left 90
+forward 100
+left 90
+
+pen  up
+forward 120
+pen
+	down
+
+pen  color #a02222
+forward 100
+left 90
+forward 100
+left 90
+forward 100
+left 90
+forward 100
+left 90
+
+pen up
+forward 20
+left 90
+forward 20
+pen down
+
+forward 60
+right 90
+forward 60
+right 90
+forward 60
+right 90
+forward 60
+
+pen up
+forward 20
+left 90
+forward 20
+left 90
+forward 120
+pen    down
+
+
+pen  color #22a022
+forward 100
+left 90
+forward 40
+left 90
+forward 20
+left 90
+forward 20
+right 90
+forward 60
+right 90
+forward 60
+right 90
+forward 60
+left 90
+forward 20
+left 90
+forward 80
+left 90
+forward 100
+left 90
+
+pen
+up
+forward 120
+pen down
+
+pen  color #a02222
+forward 
+100
+left 90
+forward 
+100
+left 90
+forward 100
+left 90
+forward 100
+left 90
+
+pen up
+forward 20
+left 90
+forward 20
+pen down
+
+forward 60
+right 90
+forward 60
+right 90
+forward 60
+right 90
+forward 60

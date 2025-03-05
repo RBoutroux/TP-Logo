@@ -1,0 +1,110 @@
+pen color #000000
+repeat 3
+[
+    forward 100
+    left 120
+]
+
+pen up
+backward 150
+pen down
+
+left 15
+forward 185
+
+right 5
+pen color #aaaaaa
+forward 40
+
+right 20
+pen color #ff0000
+forward 186
+pen up
+backward 186
+left 20
+backward 40
+
+right 1
+pen down
+
+pen color #aaaaaa
+forward 41
+
+right 20
+pen color #ffa500
+forward 186
+pen up
+backward 186
+left 20
+backward 41
+
+right 1
+pen down
+
+pen color #aaaaaa
+forward 41
+
+right 20
+pen color #ffff00
+forward 186
+pen up
+backward 186
+left 20
+backward 41
+
+right 1
+pen down
+
+pen color #aaaaaa
+forward 41
+
+right 20
+pen color #00ff00
+forward 186
+pen up
+backward 186
+left 20
+backward 41
+
+right 1
+pen down
+
+pen color #aaaaaa
+forward 42
+
+right 20
+pen color #00a5ff
+forward 186
+pen up
+backward 186
+left 20
+backward 42
+
+right 1
+pen down
+
+pen color #aaaaaa
+forward 42
+
+right 20
+pen color #0000ff
+forward 186
+pen up
+backward 186
+left 20
+backward 42
+
+right 1
+pen down
+
+pen color #aaaaaa
+forward 42
+
+right 20
+pen color #460082
+forward 186
+pen up
+backward 186
+left 20
+backward 42
+

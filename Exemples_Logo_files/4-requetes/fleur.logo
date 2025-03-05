@@ -1,0 +1,53 @@
+to reset
+    pen up
+    left heading
+    backward xcor
+    forward 500
+    right 90
+    backward ycor
+    forward 300
+    left 90
+    pen down
+end
+
+to petale
+    forward 100
+    repeat 180
+    [
+        forward 1
+        right 1
+    ]
+    reset
+end
+
+pen color #00ff00
+petale
+
+pen color #00dd22
+right 45
+petale
+
+pen color #00bb44
+right 90
+petale
+
+pen color #009966
+right 135
+petale
+
+pen color #007788
+right 180
+petale
+
+pen color #0055aa
+right 225
+petale
+
+pen color #0033cc
+right 270
+petale
+
+pen color #0011ee
+right 315
+petale
+

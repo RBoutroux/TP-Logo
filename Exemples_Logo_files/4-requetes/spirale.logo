@@ -1,0 +1,9 @@
+pen color #ff0000
+repeat 360 [ 
+    forward heading 
+    pen up 
+    backward heading 
+    pen down 
+    right 1
+]
+

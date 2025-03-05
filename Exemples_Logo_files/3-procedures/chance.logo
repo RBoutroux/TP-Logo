@@ -1,0 +1,21 @@
+pen color #00aa00
+to petale
+    left 30
+    forward 100
+    right 30
+    repeat 180
+    [
+        forward 1
+        right 1
+    ]
+    right 30
+    forward 100
+    right 150
+end
+
+repeat 4
+[
+    petale
+    right 90
+]
+
