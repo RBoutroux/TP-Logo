@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BACKWARD COLOR COLORVALUE DOWN FORWARD LEFT NUMBER PEN RIGHT UPexpression : expression expr\n                | exprexpr : FORWARD NUMBER\n            | BACKWARD NUMBER\n            | LEFT NUMBER\n            | RIGHT NUMBER\n            | PEN UP\n            | PEN DOWN\n            | PEN COLOR COLORVALUE\n    '
+_lr_signature = 'BACKWARD COLOR COLORVALUE DOWN FORWARD LBRACKET LEFT NUMBER PEN RBRACKET REPEAT RIGHT UPexpression : exprexpr : expr expr2\n            | expr2expr2 : FORWARD NUMBER\n            | BACKWARD NUMBER\n            | LEFT NUMBER\n            | RIGHT NUMBER\n            | PEN UP\n            | PEN DOWN\n            | PEN COLOR COLORVALUE\n    '
     
-_lr_action_items = {'FORWARD':([0,1,2,8,9,10,11,12,13,14,16,],[3,3,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'BACKWARD':([0,1,2,8,9,10,11,12,13,14,16,],[4,4,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'LEFT':([0,1,2,8,9,10,11,12,13,14,16,],[5,5,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'RIGHT':([0,1,2,8,9,10,11,12,13,14,16,],[6,6,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'PEN':([0,1,2,8,9,10,11,12,13,14,16,],[7,7,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'$end':([1,2,8,9,10,11,12,13,14,16,],[0,-2,-1,-3,-4,-5,-6,-7,-8,-9,]),'NUMBER':([3,4,5,6,],[9,10,11,12,]),'UP':([7,],[13,]),'DOWN':([7,],[14,]),'COLOR':([7,],[15,]),'COLORVALUE':([15,],[16,]),}
+_lr_action_items = {'FORWARD':([0,2,3,9,10,11,12,13,14,15,17,],[4,4,-3,-2,-4,-5,-6,-7,-8,-9,-10,]),'BACKWARD':([0,2,3,9,10,11,12,13,14,15,17,],[5,5,-3,-2,-4,-5,-6,-7,-8,-9,-10,]),'LEFT':([0,2,3,9,10,11,12,13,14,15,17,],[6,6,-3,-2,-4,-5,-6,-7,-8,-9,-10,]),'RIGHT':([0,2,3,9,10,11,12,13,14,15,17,],[7,7,-3,-2,-4,-5,-6,-7,-8,-9,-10,]),'PEN':([0,2,3,9,10,11,12,13,14,15,17,],[8,8,-3,-2,-4,-5,-6,-7,-8,-9,-10,]),'$end':([1,2,3,9,10,11,12,13,14,15,17,],[0,-1,-3,-2,-4,-5,-6,-7,-8,-9,-10,]),'NUMBER':([4,5,6,7,],[10,11,12,13,]),'UP':([8,],[14,]),'DOWN':([8,],[15,]),'COLOR':([8,],[16,]),'COLORVALUE':([16,],[17,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,],[1,]),'expr':([0,1,],[2,8,]),}
+_lr_goto_items = {'expression':([0,],[1,]),'expr':([0,],[2,]),'expr2':([0,2,],[3,9,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,13 +27,14 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expression expr','expression',2,'p_expression','logo.py',97),
-  ('expression -> expr','expression',1,'p_expression','logo.py',98),
-  ('expr -> FORWARD NUMBER','expr',2,'p_expr','logo.py',102),
-  ('expr -> BACKWARD NUMBER','expr',2,'p_expr','logo.py',103),
-  ('expr -> LEFT NUMBER','expr',2,'p_expr','logo.py',104),
-  ('expr -> RIGHT NUMBER','expr',2,'p_expr','logo.py',105),
-  ('expr -> PEN UP','expr',2,'p_expr','logo.py',106),
-  ('expr -> PEN DOWN','expr',2,'p_expr','logo.py',107),
-  ('expr -> PEN COLOR COLORVALUE','expr',3,'p_expr','logo.py',108),
+  ('expression -> expr','expression',1,'p_expression','logo.py',107),
+  ('expr -> expr expr2','expr',2,'p_expr','logo.py',113),
+  ('expr -> expr2','expr',1,'p_expr','logo.py',114),
+  ('expr2 -> FORWARD NUMBER','expr2',2,'p_expr2','logo.py',129),
+  ('expr2 -> BACKWARD NUMBER','expr2',2,'p_expr2','logo.py',130),
+  ('expr2 -> LEFT NUMBER','expr2',2,'p_expr2','logo.py',131),
+  ('expr2 -> RIGHT NUMBER','expr2',2,'p_expr2','logo.py',132),
+  ('expr2 -> PEN UP','expr2',2,'p_expr2','logo.py',133),
+  ('expr2 -> PEN DOWN','expr2',2,'p_expr2','logo.py',134),
+  ('expr2 -> PEN COLOR COLORVALUE','expr2',3,'p_expr2','logo.py',135),
 ]

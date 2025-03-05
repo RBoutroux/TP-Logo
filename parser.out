@@ -1,231 +1,251 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    LBRACKET
+    RBRACKET
+    REPEAT
+
 Grammar
 
 Rule 0     S' -> expression
-Rule 1     expression -> expression expr
-Rule 2     expression -> expr
-Rule 3     expr -> FORWARD NUMBER
-Rule 4     expr -> BACKWARD NUMBER
-Rule 5     expr -> LEFT NUMBER
-Rule 6     expr -> RIGHT NUMBER
-Rule 7     expr -> PEN UP
-Rule 8     expr -> PEN DOWN
-Rule 9     expr -> PEN COLOR COLORVALUE
+Rule 1     expression -> expr
+Rule 2     expr -> expr expr2
+Rule 3     expr -> expr2
+Rule 4     expr2 -> FORWARD NUMBER
+Rule 5     expr2 -> BACKWARD NUMBER
+Rule 6     expr2 -> LEFT NUMBER
+Rule 7     expr2 -> RIGHT NUMBER
+Rule 8     expr2 -> PEN UP
+Rule 9     expr2 -> PEN DOWN
+Rule 10    expr2 -> PEN COLOR COLORVALUE
 
 Terminals, with rules where they appear
 
-BACKWARD             : 4
-COLOR                : 9
-COLORVALUE           : 9
-DOWN                 : 8
-FORWARD              : 3
-LEFT                 : 5
-NUMBER               : 3 4 5 6
-PEN                  : 7 8 9
-RIGHT                : 6
-UP                   : 7
+BACKWARD             : 5
+COLOR                : 10
+COLORVALUE           : 10
+DOWN                 : 9
+FORWARD              : 4
+LBRACKET             : 
+LEFT                 : 6
+NUMBER               : 4 5 6 7
+PEN                  : 8 9 10
+RBRACKET             : 
+REPEAT               : 
+RIGHT                : 7
+UP                   : 8
 error                : 
 
 Nonterminals, with rules where they appear
 
 expr                 : 1 2
-expression           : 1 0
+expr2                : 2 3
+expression           : 0
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . expression
-    (1) expression -> . expression expr
-    (2) expression -> . expr
-    (3) expr -> . FORWARD NUMBER
-    (4) expr -> . BACKWARD NUMBER
-    (5) expr -> . LEFT NUMBER
-    (6) expr -> . RIGHT NUMBER
-    (7) expr -> . PEN UP
-    (8) expr -> . PEN DOWN
-    (9) expr -> . PEN COLOR COLORVALUE
+    (1) expression -> . expr
+    (2) expr -> . expr expr2
+    (3) expr -> . expr2
+    (4) expr2 -> . FORWARD NUMBER
+    (5) expr2 -> . BACKWARD NUMBER
+    (6) expr2 -> . LEFT NUMBER
+    (7) expr2 -> . RIGHT NUMBER
+    (8) expr2 -> . PEN UP
+    (9) expr2 -> . PEN DOWN
+    (10) expr2 -> . PEN COLOR COLORVALUE
 
-    FORWARD         shift and go to state 3
-    BACKWARD        shift and go to state 4
-    LEFT            shift and go to state 5
-    RIGHT           shift and go to state 6
-    PEN             shift and go to state 7
+    FORWARD         shift and go to state 4
+    BACKWARD        shift and go to state 5
+    LEFT            shift and go to state 6
+    RIGHT           shift and go to state 7
+    PEN             shift and go to state 8
 
     expression                     shift and go to state 1
     expr                           shift and go to state 2
+    expr2                          shift and go to state 3
 
 state 1
 
     (0) S' -> expression .
-    (1) expression -> expression . expr
-    (3) expr -> . FORWARD NUMBER
-    (4) expr -> . BACKWARD NUMBER
-    (5) expr -> . LEFT NUMBER
-    (6) expr -> . RIGHT NUMBER
-    (7) expr -> . PEN UP
-    (8) expr -> . PEN DOWN
-    (9) expr -> . PEN COLOR COLORVALUE
 
-    FORWARD         shift and go to state 3
-    BACKWARD        shift and go to state 4
-    LEFT            shift and go to state 5
-    RIGHT           shift and go to state 6
-    PEN             shift and go to state 7
 
-    expr                           shift and go to state 8
 
 state 2
 
-    (2) expression -> expr .
+    (1) expression -> expr .
+    (2) expr -> expr . expr2
+    (4) expr2 -> . FORWARD NUMBER
+    (5) expr2 -> . BACKWARD NUMBER
+    (6) expr2 -> . LEFT NUMBER
+    (7) expr2 -> . RIGHT NUMBER
+    (8) expr2 -> . PEN UP
+    (9) expr2 -> . PEN DOWN
+    (10) expr2 -> . PEN COLOR COLORVALUE
 
-    FORWARD         reduce using rule 2 (expression -> expr .)
-    BACKWARD        reduce using rule 2 (expression -> expr .)
-    LEFT            reduce using rule 2 (expression -> expr .)
-    RIGHT           reduce using rule 2 (expression -> expr .)
-    PEN             reduce using rule 2 (expression -> expr .)
-    $end            reduce using rule 2 (expression -> expr .)
+    $end            reduce using rule 1 (expression -> expr .)
+    FORWARD         shift and go to state 4
+    BACKWARD        shift and go to state 5
+    LEFT            shift and go to state 6
+    RIGHT           shift and go to state 7
+    PEN             shift and go to state 8
 
+    expr2                          shift and go to state 9
 
 state 3
 
-    (3) expr -> FORWARD . NUMBER
+    (3) expr -> expr2 .
 
-    NUMBER          shift and go to state 9
+    FORWARD         reduce using rule 3 (expr -> expr2 .)
+    BACKWARD        reduce using rule 3 (expr -> expr2 .)
+    LEFT            reduce using rule 3 (expr -> expr2 .)
+    RIGHT           reduce using rule 3 (expr -> expr2 .)
+    PEN             reduce using rule 3 (expr -> expr2 .)
+    $end            reduce using rule 3 (expr -> expr2 .)
 
 
 state 4
 
-    (4) expr -> BACKWARD . NUMBER
+    (4) expr2 -> FORWARD . NUMBER
 
     NUMBER          shift and go to state 10
 
 
 state 5
 
-    (5) expr -> LEFT . NUMBER
+    (5) expr2 -> BACKWARD . NUMBER
 
     NUMBER          shift and go to state 11
 
 
 state 6
 
-    (6) expr -> RIGHT . NUMBER
+    (6) expr2 -> LEFT . NUMBER
 
     NUMBER          shift and go to state 12
 
 
 state 7
 
-    (7) expr -> PEN . UP
-    (8) expr -> PEN . DOWN
-    (9) expr -> PEN . COLOR COLORVALUE
+    (7) expr2 -> RIGHT . NUMBER
 
-    UP              shift and go to state 13
-    DOWN            shift and go to state 14
-    COLOR           shift and go to state 15
+    NUMBER          shift and go to state 13
 
 
 state 8
 
-    (1) expression -> expression expr .
+    (8) expr2 -> PEN . UP
+    (9) expr2 -> PEN . DOWN
+    (10) expr2 -> PEN . COLOR COLORVALUE
 
-    FORWARD         reduce using rule 1 (expression -> expression expr .)
-    BACKWARD        reduce using rule 1 (expression -> expression expr .)
-    LEFT            reduce using rule 1 (expression -> expression expr .)
-    RIGHT           reduce using rule 1 (expression -> expression expr .)
-    PEN             reduce using rule 1 (expression -> expression expr .)
-    $end            reduce using rule 1 (expression -> expression expr .)
+    UP              shift and go to state 14
+    DOWN            shift and go to state 15
+    COLOR           shift and go to state 16
 
 
 state 9
 
-    (3) expr -> FORWARD NUMBER .
+    (2) expr -> expr expr2 .
 
-    FORWARD         reduce using rule 3 (expr -> FORWARD NUMBER .)
-    BACKWARD        reduce using rule 3 (expr -> FORWARD NUMBER .)
-    LEFT            reduce using rule 3 (expr -> FORWARD NUMBER .)
-    RIGHT           reduce using rule 3 (expr -> FORWARD NUMBER .)
-    PEN             reduce using rule 3 (expr -> FORWARD NUMBER .)
-    $end            reduce using rule 3 (expr -> FORWARD NUMBER .)
+    FORWARD         reduce using rule 2 (expr -> expr expr2 .)
+    BACKWARD        reduce using rule 2 (expr -> expr expr2 .)
+    LEFT            reduce using rule 2 (expr -> expr expr2 .)
+    RIGHT           reduce using rule 2 (expr -> expr expr2 .)
+    PEN             reduce using rule 2 (expr -> expr expr2 .)
+    $end            reduce using rule 2 (expr -> expr expr2 .)
 
 
 state 10
 
-    (4) expr -> BACKWARD NUMBER .
+    (4) expr2 -> FORWARD NUMBER .
 
-    FORWARD         reduce using rule 4 (expr -> BACKWARD NUMBER .)
-    BACKWARD        reduce using rule 4 (expr -> BACKWARD NUMBER .)
-    LEFT            reduce using rule 4 (expr -> BACKWARD NUMBER .)
-    RIGHT           reduce using rule 4 (expr -> BACKWARD NUMBER .)
-    PEN             reduce using rule 4 (expr -> BACKWARD NUMBER .)
-    $end            reduce using rule 4 (expr -> BACKWARD NUMBER .)
+    FORWARD         reduce using rule 4 (expr2 -> FORWARD NUMBER .)
+    BACKWARD        reduce using rule 4 (expr2 -> FORWARD NUMBER .)
+    LEFT            reduce using rule 4 (expr2 -> FORWARD NUMBER .)
+    RIGHT           reduce using rule 4 (expr2 -> FORWARD NUMBER .)
+    PEN             reduce using rule 4 (expr2 -> FORWARD NUMBER .)
+    $end            reduce using rule 4 (expr2 -> FORWARD NUMBER .)
 
 
 state 11
 
-    (5) expr -> LEFT NUMBER .
+    (5) expr2 -> BACKWARD NUMBER .
 
-    FORWARD         reduce using rule 5 (expr -> LEFT NUMBER .)
-    BACKWARD        reduce using rule 5 (expr -> LEFT NUMBER .)
-    LEFT            reduce using rule 5 (expr -> LEFT NUMBER .)
-    RIGHT           reduce using rule 5 (expr -> LEFT NUMBER .)
-    PEN             reduce using rule 5 (expr -> LEFT NUMBER .)
-    $end            reduce using rule 5 (expr -> LEFT NUMBER .)
+    FORWARD         reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
+    BACKWARD        reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
+    LEFT            reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
+    RIGHT           reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
+    PEN             reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
+    $end            reduce using rule 5 (expr2 -> BACKWARD NUMBER .)
 
 
 state 12
 
-    (6) expr -> RIGHT NUMBER .
+    (6) expr2 -> LEFT NUMBER .
 
-    FORWARD         reduce using rule 6 (expr -> RIGHT NUMBER .)
-    BACKWARD        reduce using rule 6 (expr -> RIGHT NUMBER .)
-    LEFT            reduce using rule 6 (expr -> RIGHT NUMBER .)
-    RIGHT           reduce using rule 6 (expr -> RIGHT NUMBER .)
-    PEN             reduce using rule 6 (expr -> RIGHT NUMBER .)
-    $end            reduce using rule 6 (expr -> RIGHT NUMBER .)
+    FORWARD         reduce using rule 6 (expr2 -> LEFT NUMBER .)
+    BACKWARD        reduce using rule 6 (expr2 -> LEFT NUMBER .)
+    LEFT            reduce using rule 6 (expr2 -> LEFT NUMBER .)
+    RIGHT           reduce using rule 6 (expr2 -> LEFT NUMBER .)
+    PEN             reduce using rule 6 (expr2 -> LEFT NUMBER .)
+    $end            reduce using rule 6 (expr2 -> LEFT NUMBER .)
 
 
 state 13
 
-    (7) expr -> PEN UP .
+    (7) expr2 -> RIGHT NUMBER .
 
-    FORWARD         reduce using rule 7 (expr -> PEN UP .)
-    BACKWARD        reduce using rule 7 (expr -> PEN UP .)
-    LEFT            reduce using rule 7 (expr -> PEN UP .)
-    RIGHT           reduce using rule 7 (expr -> PEN UP .)
-    PEN             reduce using rule 7 (expr -> PEN UP .)
-    $end            reduce using rule 7 (expr -> PEN UP .)
+    FORWARD         reduce using rule 7 (expr2 -> RIGHT NUMBER .)
+    BACKWARD        reduce using rule 7 (expr2 -> RIGHT NUMBER .)
+    LEFT            reduce using rule 7 (expr2 -> RIGHT NUMBER .)
+    RIGHT           reduce using rule 7 (expr2 -> RIGHT NUMBER .)
+    PEN             reduce using rule 7 (expr2 -> RIGHT NUMBER .)
+    $end            reduce using rule 7 (expr2 -> RIGHT NUMBER .)
 
 
 state 14
 
-    (8) expr -> PEN DOWN .
+    (8) expr2 -> PEN UP .
 
-    FORWARD         reduce using rule 8 (expr -> PEN DOWN .)
-    BACKWARD        reduce using rule 8 (expr -> PEN DOWN .)
-    LEFT            reduce using rule 8 (expr -> PEN DOWN .)
-    RIGHT           reduce using rule 8 (expr -> PEN DOWN .)
-    PEN             reduce using rule 8 (expr -> PEN DOWN .)
-    $end            reduce using rule 8 (expr -> PEN DOWN .)
+    FORWARD         reduce using rule 8 (expr2 -> PEN UP .)
+    BACKWARD        reduce using rule 8 (expr2 -> PEN UP .)
+    LEFT            reduce using rule 8 (expr2 -> PEN UP .)
+    RIGHT           reduce using rule 8 (expr2 -> PEN UP .)
+    PEN             reduce using rule 8 (expr2 -> PEN UP .)
+    $end            reduce using rule 8 (expr2 -> PEN UP .)
 
 
 state 15
 
-    (9) expr -> PEN COLOR . COLORVALUE
+    (9) expr2 -> PEN DOWN .
 
-    COLORVALUE      shift and go to state 16
+    FORWARD         reduce using rule 9 (expr2 -> PEN DOWN .)
+    BACKWARD        reduce using rule 9 (expr2 -> PEN DOWN .)
+    LEFT            reduce using rule 9 (expr2 -> PEN DOWN .)
+    RIGHT           reduce using rule 9 (expr2 -> PEN DOWN .)
+    PEN             reduce using rule 9 (expr2 -> PEN DOWN .)
+    $end            reduce using rule 9 (expr2 -> PEN DOWN .)
 
 
 state 16
 
-    (9) expr -> PEN COLOR COLORVALUE .
+    (10) expr2 -> PEN COLOR . COLORVALUE
 
-    FORWARD         reduce using rule 9 (expr -> PEN COLOR COLORVALUE .)
-    BACKWARD        reduce using rule 9 (expr -> PEN COLOR COLORVALUE .)
-    LEFT            reduce using rule 9 (expr -> PEN COLOR COLORVALUE .)
-    RIGHT           reduce using rule 9 (expr -> PEN COLOR COLORVALUE .)
-    PEN             reduce using rule 9 (expr -> PEN COLOR COLORVALUE .)
-    $end            reduce using rule 9 (expr -> PEN COLOR COLORVALUE .)
+    COLORVALUE      shift and go to state 17
+
+
+state 17
+
+    (10) expr2 -> PEN COLOR COLORVALUE .
+
+    FORWARD         reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
+    BACKWARD        reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
+    LEFT            reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
+    RIGHT           reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
+    PEN             reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
+    $end            reduce using rule 10 (expr2 -> PEN COLOR COLORVALUE .)
 

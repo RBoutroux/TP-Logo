@@ -4,6 +4,11 @@ from sys import argv
 
 # la classe Turtle est dans turtle.py et doit être complétée aussi
 from tortue import Turtle
+from instruction import Instruction
+from Forward import Forward
+from Right import Right
+from SetPen import SetPen
+from PenColor import PenColor
 
 #-------------------------------------------------------------------------------
 # analyse lexicale
@@ -18,7 +23,11 @@ tokens = (
     'UP',
     'DOWN',
     'COLOR',
-    'COLORVALUE')
+    'COLORVALUE',
+    'REPEAT',
+    'LBRACKET',
+    'RBRACKET'
+    )
 # TODO: plein de choses à compléter ici !
 
 #-------------------------------------------------------------------------------
@@ -92,14 +101,32 @@ foutput.write(f'<title>{argv[1]}</title>\n')
 
 lexer = lex.lex()
 
+
 # l'axiome: 
 def p_expression(p):
-    '''expression : expression expr
-                | expr'''
-    pass
+    '''expression : expr'''
+    # une expression à calculer
+    for instr in p[1]:
+        instr.code()
 
 def p_expr(p):
-    '''expr : FORWARD NUMBER
+    '''expr : expr expr2
+            | expr2'''
+    if len(p) == 3:
+        p[0] = p[1] + p[2]
+    else:
+        p[0] = p[1]
+
+
+# def p_expr_repeat(p):
+#     '''expr : REPEAT NUMBER LBRACKET expression RBRACKET,
+#             | expr2'''
+
+#     for i in range(p[2]):
+        
+
+def p_expr2(p):
+    '''expr2 : FORWARD NUMBER
             | BACKWARD NUMBER
             | LEFT NUMBER
             | RIGHT NUMBER
@@ -108,20 +135,21 @@ def p_expr(p):
             | PEN COLOR COLORVALUE
     '''
     if p[1] == 'forward':
-        turtle.forward(p[2])
+
+        p[0] = [Forward(turtle, p[2])]
     elif p[1] == 'backward':
-        turtle.forward(-p[2])
+        p[0] = [Forward(turtle, -p[2])]
     elif p[1] == 'left':
-        turtle.right(-p[2])
+        p[0] = [Right(turtle, -p[2])]
     elif p[1] == 'right':
-        turtle.right(p[2])
+        p[0] = [Right(turtle, p[2])]
     elif p[1] == 'pen':
         if p[2] == 'up':
-            turtle.set_pen(False)
+            p[0] = [SetPen(turtle, False)]
         elif p[2] == 'down':
-            turtle.set_pen(True)
+            p[0] = [SetPen(turtle, True)]
         elif p[2] == 'color':
-            turtle.set_color(p[3])
+            p[0] = [PenColor(turtle, p[3])]
 
 # gestion minimaliste des erreurs de syntaxe
 def p_error(p):
@@ -135,6 +163,7 @@ def p_error(p):
 parser = yacc.yacc()
 
 parser.parse(program)
+
 
 
 # partie finale du fichier svg
