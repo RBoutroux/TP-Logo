@@ -23,6 +23,16 @@ class Turtle:
         print(f'Bonjour, je suis une tortue, actuellement en position ({self.x}, {self.y}) !')
 
     # TODO compléter ici les méthodes de turtle: forward, right, set_pen et set_color
+    def forward(self, dist):
+        dx = dist * cos(self.angle * pi / 180)
+        dy = dist * sin(self.angle * pi / 180)
+        if self.pendown:
+            self.output.write(f'<line x1 = "{round(self.x)}" y1 = "{round(self.y)}" x2 = "{round(self.x + dx)}" y2 = "{round(self.y + dy)}" style = "stroke:{self.color}"/>\n')
+        self.x += dx
+        self.y += dy
+    
+    def right(self, angle):
+        self.angle -= angle
     # En particulier dans forward, il faudra faire le tracé si le crayon est baissé avec
     # l'instruction suivante :
     # self.output.write(f'<line x1 = "{round(self.x)}" y1 = "{round(self.y)}" x2 = "{round(self.x + dx)}" y2 = "{round(self.y + dy)}" style = "stroke:{self.color}"/>\n')

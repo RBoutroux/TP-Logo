@@ -105,7 +105,7 @@ def p_expr(p):
             | RIGHT NUMBER
             | PEN UP
             | PEN DOWN
-            | COLOR COLORVALUE
+            | PEN COLOR COLORVALUE
     '''
     pass
 
