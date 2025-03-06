@@ -12,37 +12,33 @@ from PenColor import PenColor
 
 #-------------------------------------------------------------------------------
 # analyse lexicale
+reserved = {
+   'forward' : 'FORWARD',
+   'backward' : 'BACKWARD',
+   'left' : 'LEFT',
+   'right' : 'RIGHT',
+   'pen' : 'PEN',
+   'up' : 'UP',
+   'down' : 'DOWN',
+   'color' : 'COLOR',
+   'repeat' : 'REPEAT',
+   'to' : 'TO',
+   'end' : 'END'
+}
 
-tokens = (
+tokens = [
     'NUMBER',
-    'FORWARD',
-    'BACKWARD',
-    'LEFT',
-    'RIGHT',
-    'PEN',
-    'UP',
-    'DOWN',
-    'COLOR',
     'COLORVALUE',
-    'REPEAT',
+    'NOM',
     'LBRACKET',
     'RBRACKET'
-    )
+] + list(reserved.values())
 # TODO: plein de choses à compléter ici !
 
 #-------------------------------------------------------------------------------
 # grammaire
-t_FORWARD = r'forward'
-t_BACKWARD = r'backward'
-t_LEFT = r'left'
-t_RIGHT = r'right'
-t_PEN = r'pen'
-t_UP = r'up'
-t_DOWN = r'down'
-t_COLOR = r'color'
-t_REPEAT = r'repeat'
-t_LBRACKET = r'\['
 t_RBRACKET = r'\]'
+t_LBRACKET = r'\['
 
 def t_NUMBER(t):
     r'-?[0-9]+' # on peut aussi écrire r'\d+'
@@ -57,6 +53,11 @@ def t_NUMBER(t):
 def t_COLORVALUE(t):
     r'\#([0-9a-fA-F]{6})'
     # t.value = t.value[1:] # on enlève le premier caractère
+    return t
+
+def t_NOM(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value, 'NOM') # on regarde si c'est un mot réservé, sinon on met 'NOM' à la place
     return t
 
 # caractères à ignorer: ici espaces, tabulations, saut de lignes
@@ -88,7 +89,10 @@ foutput = open(argv[1].rsplit('.', 1)[0] + '.svg', 'w')
 # une nouvelle tortue. On lui passe le fichier résultat pour qu'elle puisse
 # écrire dedans
 turtle = Turtle(foutput)
+
+procedures = {}
 turtle.hello()
+
 
 # entête du fichier svg
 foutput.write('<?xml version="1.0" standalone="no"?>\n')
@@ -140,9 +144,11 @@ def p_expr2(p):
             | PEN UP
             | PEN DOWN
             | PEN COLOR COLORVALUE
+            | TO NOM expr END
+            | NOM
     '''
+    global procedures
     if p[1] == 'forward':
-
         p[0] = [Forward(turtle, p[2])]
     elif p[1] == 'backward':
         p[0] = [Forward(turtle, -p[2])]
@@ -157,6 +163,13 @@ def p_expr2(p):
             p[0] = [SetPen(turtle, True)]
         elif p[2] == 'color':
             p[0] = [PenColor(turtle, p[3])]
+    elif p[1] == 'to' and p[2] not in procedures and p[2] not in reserved and p[4] == 'end': # and p[2] not in tokens
+        procedures[p[2]] = p[3]
+        p[0] = []
+    elif p[1] in procedures:
+        p[0] = procedures[p[1]]
+    else:
+        p[0] = []
 
 # gestion minimaliste des erreurs de syntaxe
 def p_error(p):

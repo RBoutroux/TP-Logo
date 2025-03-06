@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BACKWARD COLOR COLORVALUE DOWN FORWARD LBRACKET LEFT NUMBER PEN RBRACKET REPEAT RIGHT UPexpression : exprexpr : expr expr_repeat\n            | expr_repeatexpr_repeat : REPEAT NUMBER LBRACKET expr RBRACKET\n            | expr2expr2 : FORWARD NUMBER\n            | BACKWARD NUMBER\n            | LEFT NUMBER\n            | RIGHT NUMBER\n            | PEN UP\n            | PEN DOWN\n            | PEN COLOR COLORVALUE\n    '
+_lr_signature = 'BACKWARD COLOR COLORVALUE DOWN END FORWARD LBRACKET LEFT NOM NUMBER PEN RBRACKET REPEAT RIGHT TO UPexpression : exprexpr : expr expr_repeat\n            | expr_repeatexpr_repeat : REPEAT NUMBER LBRACKET expr RBRACKET\n            | expr2expr2 : FORWARD NUMBER\n            | BACKWARD NUMBER\n            | LEFT NUMBER\n            | RIGHT NUMBER\n            | PEN UP\n            | PEN DOWN\n            | PEN COLOR COLORVALUE\n            | TO NOM expr END\n            | NOM\n    '
     
-_lr_action_items = {'REPEAT':([0,2,3,5,11,13,14,15,16,17,18,20,21,22,23,],[4,4,-3,-5,-2,-6,-7,-8,-9,-10,-11,4,-12,4,-4,]),'FORWARD':([0,2,3,5,11,13,14,15,16,17,18,20,21,22,23,],[6,6,-3,-5,-2,-6,-7,-8,-9,-10,-11,6,-12,6,-4,]),'BACKWARD':([0,2,3,5,11,13,14,15,16,17,18,20,21,22,23,],[7,7,-3,-5,-2,-6,-7,-8,-9,-10,-11,7,-12,7,-4,]),'LEFT':([0,2,3,5,11,13,14,15,16,17,18,20,21,22,23,],[8,8,-3,-5,-2,-6,-7,-8,-9,-10,-11,8,-12,8,-4,]),'RIGHT':([0,2,3,5,11,13,14,15,16,17,18,20,21,22,23,],[9,9,-3,-5,-2,-6,-7,-8,-9,-10,-11,9,-12,9,-4,]),'PEN':([0,2,3,5,11,13,14,15,16,17,18,20,21,22,23,],[10,10,-3,-5,-2,-6,-7,-8,-9,-10,-11,10,-12,10,-4,]),'$end':([1,2,3,5,11,13,14,15,16,17,18,21,23,],[0,-1,-3,-5,-2,-6,-7,-8,-9,-10,-11,-12,-4,]),'RBRACKET':([3,5,11,13,14,15,16,17,18,21,22,23,],[-3,-5,-2,-6,-7,-8,-9,-10,-11,-12,23,-4,]),'NUMBER':([4,6,7,8,9,],[12,13,14,15,16,]),'UP':([10,],[17,]),'DOWN':([10,],[18,]),'COLOR':([10,],[19,]),'LBRACKET':([12,],[20,]),'COLORVALUE':([19,],[21,]),}
+_lr_action_items = {'REPEAT':([0,2,3,5,12,13,15,16,17,18,19,20,22,23,24,25,26,27,28,],[4,4,-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,4,4,-12,4,4,-13,-4,]),'FORWARD':([0,2,3,5,12,13,15,16,17,18,19,20,22,23,24,25,26,27,28,],[6,6,-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,6,6,-12,6,6,-13,-4,]),'BACKWARD':([0,2,3,5,12,13,15,16,17,18,19,20,22,23,24,25,26,27,28,],[7,7,-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,7,7,-12,7,7,-13,-4,]),'LEFT':([0,2,3,5,12,13,15,16,17,18,19,20,22,23,24,25,26,27,28,],[8,8,-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,8,8,-12,8,8,-13,-4,]),'RIGHT':([0,2,3,5,12,13,15,16,17,18,19,20,22,23,24,25,26,27,28,],[9,9,-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,9,9,-12,9,9,-13,-4,]),'PEN':([0,2,3,5,12,13,15,16,17,18,19,20,22,23,24,25,26,27,28,],[10,10,-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,10,10,-12,10,10,-13,-4,]),'TO':([0,2,3,5,12,13,15,16,17,18,19,20,22,23,24,25,26,27,28,],[11,11,-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,11,11,-12,11,11,-13,-4,]),'NOM':([0,2,3,5,11,12,13,15,16,17,18,19,20,22,23,24,25,26,27,28,],[12,12,-3,-5,22,-14,-2,-6,-7,-8,-9,-10,-11,12,12,-12,12,12,-13,-4,]),'$end':([1,2,3,5,12,13,15,16,17,18,19,20,24,27,28,],[0,-1,-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,-12,-13,-4,]),'END':([3,5,12,13,15,16,17,18,19,20,24,25,27,28,],[-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,-12,27,-13,-4,]),'RBRACKET':([3,5,12,13,15,16,17,18,19,20,24,26,27,28,],[-3,-5,-14,-2,-6,-7,-8,-9,-10,-11,-12,28,-13,-4,]),'NUMBER':([4,6,7,8,9,],[14,15,16,17,18,]),'UP':([10,],[19,]),'DOWN':([10,],[20,]),'COLOR':([10,],[21,]),'LBRACKET':([14,],[23,]),'COLORVALUE':([21,],[24,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,],[1,]),'expr':([0,20,],[2,22,]),'expr_repeat':([0,2,20,22,],[3,11,3,11,]),'expr2':([0,2,20,22,],[5,5,5,5,]),}
+_lr_goto_items = {'expression':([0,],[1,]),'expr':([0,22,23,],[2,25,26,]),'expr_repeat':([0,2,22,23,25,26,],[3,13,3,3,13,13,]),'expr2':([0,2,22,23,25,26,],[5,5,5,5,5,5,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,16 +27,18 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expr','expression',1,'p_expression','logo.py',110),
-  ('expr -> expr expr_repeat','expr',2,'p_expr','logo.py',116),
-  ('expr -> expr_repeat','expr',1,'p_expr','logo.py',117),
-  ('expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET','expr_repeat',5,'p_expr_repeat','logo.py',125),
-  ('expr_repeat -> expr2','expr_repeat',1,'p_expr_repeat','logo.py',126),
-  ('expr2 -> FORWARD NUMBER','expr2',2,'p_expr2','logo.py',136),
-  ('expr2 -> BACKWARD NUMBER','expr2',2,'p_expr2','logo.py',137),
-  ('expr2 -> LEFT NUMBER','expr2',2,'p_expr2','logo.py',138),
-  ('expr2 -> RIGHT NUMBER','expr2',2,'p_expr2','logo.py',139),
-  ('expr2 -> PEN UP','expr2',2,'p_expr2','logo.py',140),
-  ('expr2 -> PEN DOWN','expr2',2,'p_expr2','logo.py',141),
-  ('expr2 -> PEN COLOR COLORVALUE','expr2',3,'p_expr2','logo.py',142),
+  ('expression -> expr','expression',1,'p_expression','logo.py',114),
+  ('expr -> expr expr_repeat','expr',2,'p_expr','logo.py',120),
+  ('expr -> expr_repeat','expr',1,'p_expr','logo.py',121),
+  ('expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET','expr_repeat',5,'p_expr_repeat','logo.py',129),
+  ('expr_repeat -> expr2','expr_repeat',1,'p_expr_repeat','logo.py',130),
+  ('expr2 -> FORWARD NUMBER','expr2',2,'p_expr2','logo.py',140),
+  ('expr2 -> BACKWARD NUMBER','expr2',2,'p_expr2','logo.py',141),
+  ('expr2 -> LEFT NUMBER','expr2',2,'p_expr2','logo.py',142),
+  ('expr2 -> RIGHT NUMBER','expr2',2,'p_expr2','logo.py',143),
+  ('expr2 -> PEN UP','expr2',2,'p_expr2','logo.py',144),
+  ('expr2 -> PEN DOWN','expr2',2,'p_expr2','logo.py',145),
+  ('expr2 -> PEN COLOR COLORVALUE','expr2',3,'p_expr2','logo.py',146),
+  ('expr2 -> TO NOM expr END','expr2',4,'p_expr2','logo.py',147),
+  ('expr2 -> NOM','expr2',1,'p_expr2','logo.py',148),
 ]
