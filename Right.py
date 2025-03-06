@@ -6,4 +6,4 @@ class Right(Instruction):
         self.angle = angle
 
     def code(self):
-        self.turtle.right(self.angle)
+        self.turtle.right(self.angle.value(self.turtle))

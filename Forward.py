@@ -6,4 +6,4 @@ class Forward(Instruction):
         self.distance = distance
     
     def code(self):
-        self.turtle.forward(self.distance)
+        self.turtle.forward(self.distance.value(self.turtle))

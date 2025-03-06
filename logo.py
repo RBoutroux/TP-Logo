@@ -9,6 +9,10 @@ from Forward import Forward
 from Right import Right
 from SetPen import SetPen
 from PenColor import PenColor
+from Heading import Heading
+from Xcor import Xcor
+from Ycor import Ycor
+from Value import IntValue
 
 #-------------------------------------------------------------------------------
 # analyse lexicale
@@ -23,7 +27,10 @@ reserved = {
    'color' : 'COLOR',
    'repeat' : 'REPEAT',
    'to' : 'TO',
-   'end' : 'END'
+   'end' : 'END',
+   'xcor' : 'XCOR',
+   'ycor' : 'YCOR',
+   'heading' : 'HEADING'
 }
 
 tokens = [
@@ -137,10 +144,10 @@ def p_expr_repeat(p):
         
 
 def p_expr2(p):
-    '''expr2 : FORWARD NUMBER
-            | BACKWARD NUMBER
-            | LEFT NUMBER
-            | RIGHT NUMBER
+    '''expr2 : FORWARD terme
+            | BACKWARD terme
+            | LEFT terme
+            | RIGHT terme
             | PEN UP
             | PEN DOWN
             | PEN COLOR COLORVALUE
@@ -170,6 +177,21 @@ def p_expr2(p):
         p[0] = procedures[p[1]]
     else:
         p[0] = []
+
+def p_terme(p):
+    '''terme : NUMBER
+            | XCOR
+            | YCOR
+            | HEADING
+    '''
+    if p[1] == 'xcor':
+        p[0] = Xcor()
+    elif p[1] == 'ycor':
+        p[0] = Ycor()
+    elif p[1] == 'heading':
+        p[0] = Heading()
+    else:
+        p[0] = IntValue(p[1])
 
 # gestion minimaliste des erreurs de syntaxe
 def p_error(p):
