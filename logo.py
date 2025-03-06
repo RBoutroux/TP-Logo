@@ -13,6 +13,8 @@ from Heading import Heading
 from Xcor import Xcor
 from Ycor import Ycor
 from Value import IntValue
+from Parametre import Parametre
+from Procedure import Procedure
 
 #-------------------------------------------------------------------------------
 # analyse lexicale
@@ -38,7 +40,8 @@ tokens = [
     'COLORVALUE',
     'NOM',
     'LBRACKET',
-    'RBRACKET'
+    'RBRACKET',
+    'PARAMETRE'
 ] + list(reserved.values())
 # TODO: plein de choses à compléter ici !
 
@@ -46,6 +49,7 @@ tokens = [
 # grammaire
 t_RBRACKET = r'\]'
 t_LBRACKET = r'\['
+t_PARAMETRE = r':[a-zA-Z_0-9]+'
 
 def t_NUMBER(t):
     r'-?[0-9]+' # on peut aussi écrire r'\d+'
@@ -151,8 +155,8 @@ def p_expr2(p):
             | PEN UP
             | PEN DOWN
             | PEN COLOR COLORVALUE
-            | TO NOM expr END
-            | NOM
+            | TO parametres NOM expr END
+            | NOM valeurs_parametres
     '''
     global procedures
     if p[1] == 'forward':
@@ -170,19 +174,42 @@ def p_expr2(p):
             p[0] = [SetPen(turtle, True)]
         elif p[2] == 'color':
             p[0] = [PenColor(turtle, p[3])]
-    elif p[1] == 'to' and p[2] not in procedures and p[2] not in reserved and p[4] == 'end': # and p[2] not in tokens
-        procedures[p[2]] = p[3]
+    elif p[1] == 'to' and p[3] not in procedures and p[3] not in reserved and p[5] == 'end':
+        procedures[p[3]] = Procedure(p[4], p[2], p[4])
         p[0] = []
     elif p[1] in procedures:
-        p[0] = procedures[p[1]]
+        p[0] = procedures[p[1]].name
     else:
         p[0] = []
+
+def p_parametres(p):
+    '''parametres : parametres PARAMETRE
+            | empty
+    '''
+    if p[1] == None:
+        p[0] = []
+    else:
+        p[0] = p[1] + [p[2]]
+
+def p_empty(p):
+    'empty :'
+    pass
+
+def p_valeurs_parametres(p):
+    '''valeurs_parametres : empty
+            | valeurs_parametres terme
+    '''
+    if p[1] == None:
+        p[0] = []
+    else:
+        p[0] = p[1] + [p[2]]
 
 def p_terme(p):
     '''terme : NUMBER
             | XCOR
             | YCOR
             | HEADING
+            | PARAMETRE
     '''
     if p[1] == 'xcor':
         p[0] = Xcor()
@@ -190,8 +217,11 @@ def p_terme(p):
         p[0] = Ycor()
     elif p[1] == 'heading':
         p[0] = Heading()
-    else:
+    elif type(p[1]) is int:
         p[0] = IntValue(p[1])
+    elif p[1][0] == ':':
+        p[0] = Parametre(p[1])
+        
 
 # gestion minimaliste des erreurs de syntaxe
 def p_error(p):

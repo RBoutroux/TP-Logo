@@ -15,12 +15,18 @@ Rule 9     expr2 -> RIGHT terme
 Rule 10    expr2 -> PEN UP
 Rule 11    expr2 -> PEN DOWN
 Rule 12    expr2 -> PEN COLOR COLORVALUE
-Rule 13    expr2 -> TO NOM expr END
-Rule 14    expr2 -> NOM
-Rule 15    terme -> NUMBER
-Rule 16    terme -> XCOR
-Rule 17    terme -> YCOR
-Rule 18    terme -> HEADING
+Rule 13    expr2 -> TO parametres NOM expr END
+Rule 14    expr2 -> NOM valeurs_parametres
+Rule 15    parametres -> parametres PARAMETRE
+Rule 16    parametres -> empty
+Rule 17    empty -> <empty>
+Rule 18    valeurs_parametres -> empty
+Rule 19    valeurs_parametres -> valeurs_parametres terme
+Rule 20    terme -> NUMBER
+Rule 21    terme -> XCOR
+Rule 22    terme -> YCOR
+Rule 23    terme -> HEADING
+Rule 24    terme -> PARAMETRE
 
 Terminals, with rules where they appear
 
@@ -30,28 +36,32 @@ COLORVALUE           : 12
 DOWN                 : 11
 END                  : 13
 FORWARD              : 6
-HEADING              : 18
+HEADING              : 23
 LBRACKET             : 4
 LEFT                 : 8
 NOM                  : 13 14
-NUMBER               : 4 15
+NUMBER               : 4 20
+PARAMETRE            : 15 24
 PEN                  : 10 11 12
 RBRACKET             : 4
 REPEAT               : 4
 RIGHT                : 9
 TO                   : 13
 UP                   : 10
-XCOR                 : 16
-YCOR                 : 17
+XCOR                 : 21
+YCOR                 : 22
 error                : 
 
 Nonterminals, with rules where they appear
 
+empty                : 16 18
 expr                 : 1 2 4 13
 expr2                : 5
 expr_repeat          : 2 3
 expression           : 0
-terme                : 6 7 8 9
+parametres           : 13 15
+terme                : 6 7 8 9 19
+valeurs_parametres   : 14 19
 
 Parsing method: LALR
 
@@ -70,8 +80,8 @@ state 0
     (10) expr2 -> . PEN UP
     (11) expr2 -> . PEN DOWN
     (12) expr2 -> . PEN COLOR COLORVALUE
-    (13) expr2 -> . TO NOM expr END
-    (14) expr2 -> . NOM
+    (13) expr2 -> . TO parametres NOM expr END
+    (14) expr2 -> . NOM valeurs_parametres
 
     REPEAT          shift and go to state 4
     FORWARD         shift and go to state 6
@@ -106,8 +116,8 @@ state 2
     (10) expr2 -> . PEN UP
     (11) expr2 -> . PEN DOWN
     (12) expr2 -> . PEN COLOR COLORVALUE
-    (13) expr2 -> . TO NOM expr END
-    (14) expr2 -> . NOM
+    (13) expr2 -> . TO parametres NOM expr END
+    (14) expr2 -> . NOM valeurs_parametres
 
     $end            reduce using rule 1 (expression -> expr .)
     REPEAT          shift and go to state 4
@@ -135,8 +145,8 @@ state 3
     TO              reduce using rule 3 (expr -> expr_repeat .)
     NOM             reduce using rule 3 (expr -> expr_repeat .)
     $end            reduce using rule 3 (expr -> expr_repeat .)
-    END             reduce using rule 3 (expr -> expr_repeat .)
     RBRACKET        reduce using rule 3 (expr -> expr_repeat .)
+    END             reduce using rule 3 (expr -> expr_repeat .)
 
 
 state 4
@@ -159,69 +169,77 @@ state 5
     TO              reduce using rule 5 (expr_repeat -> expr2 .)
     NOM             reduce using rule 5 (expr_repeat -> expr2 .)
     $end            reduce using rule 5 (expr_repeat -> expr2 .)
-    END             reduce using rule 5 (expr_repeat -> expr2 .)
     RBRACKET        reduce using rule 5 (expr_repeat -> expr2 .)
+    END             reduce using rule 5 (expr_repeat -> expr2 .)
 
 
 state 6
 
     (6) expr2 -> FORWARD . terme
-    (15) terme -> . NUMBER
-    (16) terme -> . XCOR
-    (17) terme -> . YCOR
-    (18) terme -> . HEADING
+    (20) terme -> . NUMBER
+    (21) terme -> . XCOR
+    (22) terme -> . YCOR
+    (23) terme -> . HEADING
+    (24) terme -> . PARAMETRE
 
     NUMBER          shift and go to state 16
     XCOR            shift and go to state 17
     YCOR            shift and go to state 18
     HEADING         shift and go to state 19
+    PARAMETRE       shift and go to state 20
 
     terme                          shift and go to state 15
 
 state 7
 
     (7) expr2 -> BACKWARD . terme
-    (15) terme -> . NUMBER
-    (16) terme -> . XCOR
-    (17) terme -> . YCOR
-    (18) terme -> . HEADING
+    (20) terme -> . NUMBER
+    (21) terme -> . XCOR
+    (22) terme -> . YCOR
+    (23) terme -> . HEADING
+    (24) terme -> . PARAMETRE
 
     NUMBER          shift and go to state 16
     XCOR            shift and go to state 17
     YCOR            shift and go to state 18
     HEADING         shift and go to state 19
+    PARAMETRE       shift and go to state 20
 
-    terme                          shift and go to state 20
+    terme                          shift and go to state 21
 
 state 8
 
     (8) expr2 -> LEFT . terme
-    (15) terme -> . NUMBER
-    (16) terme -> . XCOR
-    (17) terme -> . YCOR
-    (18) terme -> . HEADING
+    (20) terme -> . NUMBER
+    (21) terme -> . XCOR
+    (22) terme -> . YCOR
+    (23) terme -> . HEADING
+    (24) terme -> . PARAMETRE
 
     NUMBER          shift and go to state 16
     XCOR            shift and go to state 17
     YCOR            shift and go to state 18
     HEADING         shift and go to state 19
+    PARAMETRE       shift and go to state 20
 
-    terme                          shift and go to state 21
+    terme                          shift and go to state 22
 
 state 9
 
     (9) expr2 -> RIGHT . terme
-    (15) terme -> . NUMBER
-    (16) terme -> . XCOR
-    (17) terme -> . YCOR
-    (18) terme -> . HEADING
+    (20) terme -> . NUMBER
+    (21) terme -> . XCOR
+    (22) terme -> . YCOR
+    (23) terme -> . HEADING
+    (24) terme -> . PARAMETRE
 
     NUMBER          shift and go to state 16
     XCOR            shift and go to state 17
     YCOR            shift and go to state 18
     HEADING         shift and go to state 19
+    PARAMETRE       shift and go to state 20
 
-    terme                          shift and go to state 22
+    terme                          shift and go to state 23
 
 state 10
 
@@ -229,34 +247,50 @@ state 10
     (11) expr2 -> PEN . DOWN
     (12) expr2 -> PEN . COLOR COLORVALUE
 
-    UP              shift and go to state 23
-    DOWN            shift and go to state 24
-    COLOR           shift and go to state 25
+    UP              shift and go to state 24
+    DOWN            shift and go to state 25
+    COLOR           shift and go to state 26
 
 
 state 11
 
-    (13) expr2 -> TO . NOM expr END
+    (13) expr2 -> TO . parametres NOM expr END
+    (15) parametres -> . parametres PARAMETRE
+    (16) parametres -> . empty
+    (17) empty -> .
 
-    NOM             shift and go to state 26
+    NOM             reduce using rule 17 (empty -> .)
+    PARAMETRE       reduce using rule 17 (empty -> .)
 
+    parametres                     shift and go to state 27
+    empty                          shift and go to state 28
 
 state 12
 
-    (14) expr2 -> NOM .
+    (14) expr2 -> NOM . valeurs_parametres
+    (18) valeurs_parametres -> . empty
+    (19) valeurs_parametres -> . valeurs_parametres terme
+    (17) empty -> .
 
-    REPEAT          reduce using rule 14 (expr2 -> NOM .)
-    FORWARD         reduce using rule 14 (expr2 -> NOM .)
-    BACKWARD        reduce using rule 14 (expr2 -> NOM .)
-    LEFT            reduce using rule 14 (expr2 -> NOM .)
-    RIGHT           reduce using rule 14 (expr2 -> NOM .)
-    PEN             reduce using rule 14 (expr2 -> NOM .)
-    TO              reduce using rule 14 (expr2 -> NOM .)
-    NOM             reduce using rule 14 (expr2 -> NOM .)
-    $end            reduce using rule 14 (expr2 -> NOM .)
-    END             reduce using rule 14 (expr2 -> NOM .)
-    RBRACKET        reduce using rule 14 (expr2 -> NOM .)
+    NUMBER          reduce using rule 17 (empty -> .)
+    XCOR            reduce using rule 17 (empty -> .)
+    YCOR            reduce using rule 17 (empty -> .)
+    HEADING         reduce using rule 17 (empty -> .)
+    PARAMETRE       reduce using rule 17 (empty -> .)
+    REPEAT          reduce using rule 17 (empty -> .)
+    FORWARD         reduce using rule 17 (empty -> .)
+    BACKWARD        reduce using rule 17 (empty -> .)
+    LEFT            reduce using rule 17 (empty -> .)
+    RIGHT           reduce using rule 17 (empty -> .)
+    PEN             reduce using rule 17 (empty -> .)
+    TO              reduce using rule 17 (empty -> .)
+    NOM             reduce using rule 17 (empty -> .)
+    $end            reduce using rule 17 (empty -> .)
+    RBRACKET        reduce using rule 17 (empty -> .)
+    END             reduce using rule 17 (empty -> .)
 
+    valeurs_parametres             shift and go to state 29
+    empty                          shift and go to state 30
 
 state 13
 
@@ -271,15 +305,15 @@ state 13
     TO              reduce using rule 2 (expr -> expr expr_repeat .)
     NOM             reduce using rule 2 (expr -> expr expr_repeat .)
     $end            reduce using rule 2 (expr -> expr expr_repeat .)
-    END             reduce using rule 2 (expr -> expr expr_repeat .)
     RBRACKET        reduce using rule 2 (expr -> expr expr_repeat .)
+    END             reduce using rule 2 (expr -> expr expr_repeat .)
 
 
 state 14
 
     (4) expr_repeat -> REPEAT NUMBER . LBRACKET expr RBRACKET
 
-    LBRACKET        shift and go to state 27
+    LBRACKET        shift and go to state 31
 
 
 state 15
@@ -295,79 +329,121 @@ state 15
     TO              reduce using rule 6 (expr2 -> FORWARD terme .)
     NOM             reduce using rule 6 (expr2 -> FORWARD terme .)
     $end            reduce using rule 6 (expr2 -> FORWARD terme .)
-    END             reduce using rule 6 (expr2 -> FORWARD terme .)
     RBRACKET        reduce using rule 6 (expr2 -> FORWARD terme .)
+    END             reduce using rule 6 (expr2 -> FORWARD terme .)
 
 
 state 16
 
-    (15) terme -> NUMBER .
+    (20) terme -> NUMBER .
 
-    REPEAT          reduce using rule 15 (terme -> NUMBER .)
-    FORWARD         reduce using rule 15 (terme -> NUMBER .)
-    BACKWARD        reduce using rule 15 (terme -> NUMBER .)
-    LEFT            reduce using rule 15 (terme -> NUMBER .)
-    RIGHT           reduce using rule 15 (terme -> NUMBER .)
-    PEN             reduce using rule 15 (terme -> NUMBER .)
-    TO              reduce using rule 15 (terme -> NUMBER .)
-    NOM             reduce using rule 15 (terme -> NUMBER .)
-    $end            reduce using rule 15 (terme -> NUMBER .)
-    END             reduce using rule 15 (terme -> NUMBER .)
-    RBRACKET        reduce using rule 15 (terme -> NUMBER .)
+    REPEAT          reduce using rule 20 (terme -> NUMBER .)
+    FORWARD         reduce using rule 20 (terme -> NUMBER .)
+    BACKWARD        reduce using rule 20 (terme -> NUMBER .)
+    LEFT            reduce using rule 20 (terme -> NUMBER .)
+    RIGHT           reduce using rule 20 (terme -> NUMBER .)
+    PEN             reduce using rule 20 (terme -> NUMBER .)
+    TO              reduce using rule 20 (terme -> NUMBER .)
+    NOM             reduce using rule 20 (terme -> NUMBER .)
+    $end            reduce using rule 20 (terme -> NUMBER .)
+    RBRACKET        reduce using rule 20 (terme -> NUMBER .)
+    END             reduce using rule 20 (terme -> NUMBER .)
+    NUMBER          reduce using rule 20 (terme -> NUMBER .)
+    XCOR            reduce using rule 20 (terme -> NUMBER .)
+    YCOR            reduce using rule 20 (terme -> NUMBER .)
+    HEADING         reduce using rule 20 (terme -> NUMBER .)
+    PARAMETRE       reduce using rule 20 (terme -> NUMBER .)
 
 
 state 17
 
-    (16) terme -> XCOR .
+    (21) terme -> XCOR .
 
-    REPEAT          reduce using rule 16 (terme -> XCOR .)
-    FORWARD         reduce using rule 16 (terme -> XCOR .)
-    BACKWARD        reduce using rule 16 (terme -> XCOR .)
-    LEFT            reduce using rule 16 (terme -> XCOR .)
-    RIGHT           reduce using rule 16 (terme -> XCOR .)
-    PEN             reduce using rule 16 (terme -> XCOR .)
-    TO              reduce using rule 16 (terme -> XCOR .)
-    NOM             reduce using rule 16 (terme -> XCOR .)
-    $end            reduce using rule 16 (terme -> XCOR .)
-    END             reduce using rule 16 (terme -> XCOR .)
-    RBRACKET        reduce using rule 16 (terme -> XCOR .)
+    REPEAT          reduce using rule 21 (terme -> XCOR .)
+    FORWARD         reduce using rule 21 (terme -> XCOR .)
+    BACKWARD        reduce using rule 21 (terme -> XCOR .)
+    LEFT            reduce using rule 21 (terme -> XCOR .)
+    RIGHT           reduce using rule 21 (terme -> XCOR .)
+    PEN             reduce using rule 21 (terme -> XCOR .)
+    TO              reduce using rule 21 (terme -> XCOR .)
+    NOM             reduce using rule 21 (terme -> XCOR .)
+    $end            reduce using rule 21 (terme -> XCOR .)
+    RBRACKET        reduce using rule 21 (terme -> XCOR .)
+    END             reduce using rule 21 (terme -> XCOR .)
+    NUMBER          reduce using rule 21 (terme -> XCOR .)
+    XCOR            reduce using rule 21 (terme -> XCOR .)
+    YCOR            reduce using rule 21 (terme -> XCOR .)
+    HEADING         reduce using rule 21 (terme -> XCOR .)
+    PARAMETRE       reduce using rule 21 (terme -> XCOR .)
 
 
 state 18
 
-    (17) terme -> YCOR .
+    (22) terme -> YCOR .
 
-    REPEAT          reduce using rule 17 (terme -> YCOR .)
-    FORWARD         reduce using rule 17 (terme -> YCOR .)
-    BACKWARD        reduce using rule 17 (terme -> YCOR .)
-    LEFT            reduce using rule 17 (terme -> YCOR .)
-    RIGHT           reduce using rule 17 (terme -> YCOR .)
-    PEN             reduce using rule 17 (terme -> YCOR .)
-    TO              reduce using rule 17 (terme -> YCOR .)
-    NOM             reduce using rule 17 (terme -> YCOR .)
-    $end            reduce using rule 17 (terme -> YCOR .)
-    END             reduce using rule 17 (terme -> YCOR .)
-    RBRACKET        reduce using rule 17 (terme -> YCOR .)
+    REPEAT          reduce using rule 22 (terme -> YCOR .)
+    FORWARD         reduce using rule 22 (terme -> YCOR .)
+    BACKWARD        reduce using rule 22 (terme -> YCOR .)
+    LEFT            reduce using rule 22 (terme -> YCOR .)
+    RIGHT           reduce using rule 22 (terme -> YCOR .)
+    PEN             reduce using rule 22 (terme -> YCOR .)
+    TO              reduce using rule 22 (terme -> YCOR .)
+    NOM             reduce using rule 22 (terme -> YCOR .)
+    $end            reduce using rule 22 (terme -> YCOR .)
+    RBRACKET        reduce using rule 22 (terme -> YCOR .)
+    END             reduce using rule 22 (terme -> YCOR .)
+    NUMBER          reduce using rule 22 (terme -> YCOR .)
+    XCOR            reduce using rule 22 (terme -> YCOR .)
+    YCOR            reduce using rule 22 (terme -> YCOR .)
+    HEADING         reduce using rule 22 (terme -> YCOR .)
+    PARAMETRE       reduce using rule 22 (terme -> YCOR .)
 
 
 state 19
 
-    (18) terme -> HEADING .
+    (23) terme -> HEADING .
 
-    REPEAT          reduce using rule 18 (terme -> HEADING .)
-    FORWARD         reduce using rule 18 (terme -> HEADING .)
-    BACKWARD        reduce using rule 18 (terme -> HEADING .)
-    LEFT            reduce using rule 18 (terme -> HEADING .)
-    RIGHT           reduce using rule 18 (terme -> HEADING .)
-    PEN             reduce using rule 18 (terme -> HEADING .)
-    TO              reduce using rule 18 (terme -> HEADING .)
-    NOM             reduce using rule 18 (terme -> HEADING .)
-    $end            reduce using rule 18 (terme -> HEADING .)
-    END             reduce using rule 18 (terme -> HEADING .)
-    RBRACKET        reduce using rule 18 (terme -> HEADING .)
+    REPEAT          reduce using rule 23 (terme -> HEADING .)
+    FORWARD         reduce using rule 23 (terme -> HEADING .)
+    BACKWARD        reduce using rule 23 (terme -> HEADING .)
+    LEFT            reduce using rule 23 (terme -> HEADING .)
+    RIGHT           reduce using rule 23 (terme -> HEADING .)
+    PEN             reduce using rule 23 (terme -> HEADING .)
+    TO              reduce using rule 23 (terme -> HEADING .)
+    NOM             reduce using rule 23 (terme -> HEADING .)
+    $end            reduce using rule 23 (terme -> HEADING .)
+    RBRACKET        reduce using rule 23 (terme -> HEADING .)
+    END             reduce using rule 23 (terme -> HEADING .)
+    NUMBER          reduce using rule 23 (terme -> HEADING .)
+    XCOR            reduce using rule 23 (terme -> HEADING .)
+    YCOR            reduce using rule 23 (terme -> HEADING .)
+    HEADING         reduce using rule 23 (terme -> HEADING .)
+    PARAMETRE       reduce using rule 23 (terme -> HEADING .)
 
 
 state 20
+
+    (24) terme -> PARAMETRE .
+
+    REPEAT          reduce using rule 24 (terme -> PARAMETRE .)
+    FORWARD         reduce using rule 24 (terme -> PARAMETRE .)
+    BACKWARD        reduce using rule 24 (terme -> PARAMETRE .)
+    LEFT            reduce using rule 24 (terme -> PARAMETRE .)
+    RIGHT           reduce using rule 24 (terme -> PARAMETRE .)
+    PEN             reduce using rule 24 (terme -> PARAMETRE .)
+    TO              reduce using rule 24 (terme -> PARAMETRE .)
+    NOM             reduce using rule 24 (terme -> PARAMETRE .)
+    $end            reduce using rule 24 (terme -> PARAMETRE .)
+    RBRACKET        reduce using rule 24 (terme -> PARAMETRE .)
+    END             reduce using rule 24 (terme -> PARAMETRE .)
+    NUMBER          reduce using rule 24 (terme -> PARAMETRE .)
+    XCOR            reduce using rule 24 (terme -> PARAMETRE .)
+    YCOR            reduce using rule 24 (terme -> PARAMETRE .)
+    HEADING         reduce using rule 24 (terme -> PARAMETRE .)
+    PARAMETRE       reduce using rule 24 (terme -> PARAMETRE .)
+
+
+state 21
 
     (7) expr2 -> BACKWARD terme .
 
@@ -380,11 +456,11 @@ state 20
     TO              reduce using rule 7 (expr2 -> BACKWARD terme .)
     NOM             reduce using rule 7 (expr2 -> BACKWARD terme .)
     $end            reduce using rule 7 (expr2 -> BACKWARD terme .)
-    END             reduce using rule 7 (expr2 -> BACKWARD terme .)
     RBRACKET        reduce using rule 7 (expr2 -> BACKWARD terme .)
+    END             reduce using rule 7 (expr2 -> BACKWARD terme .)
 
 
-state 21
+state 22
 
     (8) expr2 -> LEFT terme .
 
@@ -397,11 +473,11 @@ state 21
     TO              reduce using rule 8 (expr2 -> LEFT terme .)
     NOM             reduce using rule 8 (expr2 -> LEFT terme .)
     $end            reduce using rule 8 (expr2 -> LEFT terme .)
-    END             reduce using rule 8 (expr2 -> LEFT terme .)
     RBRACKET        reduce using rule 8 (expr2 -> LEFT terme .)
+    END             reduce using rule 8 (expr2 -> LEFT terme .)
 
 
-state 22
+state 23
 
     (9) expr2 -> RIGHT terme .
 
@@ -414,11 +490,11 @@ state 22
     TO              reduce using rule 9 (expr2 -> RIGHT terme .)
     NOM             reduce using rule 9 (expr2 -> RIGHT terme .)
     $end            reduce using rule 9 (expr2 -> RIGHT terme .)
-    END             reduce using rule 9 (expr2 -> RIGHT terme .)
     RBRACKET        reduce using rule 9 (expr2 -> RIGHT terme .)
+    END             reduce using rule 9 (expr2 -> RIGHT terme .)
 
 
-state 23
+state 24
 
     (10) expr2 -> PEN UP .
 
@@ -431,11 +507,11 @@ state 23
     TO              reduce using rule 10 (expr2 -> PEN UP .)
     NOM             reduce using rule 10 (expr2 -> PEN UP .)
     $end            reduce using rule 10 (expr2 -> PEN UP .)
-    END             reduce using rule 10 (expr2 -> PEN UP .)
     RBRACKET        reduce using rule 10 (expr2 -> PEN UP .)
+    END             reduce using rule 10 (expr2 -> PEN UP .)
 
 
-state 24
+state 25
 
     (11) expr2 -> PEN DOWN .
 
@@ -448,48 +524,86 @@ state 24
     TO              reduce using rule 11 (expr2 -> PEN DOWN .)
     NOM             reduce using rule 11 (expr2 -> PEN DOWN .)
     $end            reduce using rule 11 (expr2 -> PEN DOWN .)
-    END             reduce using rule 11 (expr2 -> PEN DOWN .)
     RBRACKET        reduce using rule 11 (expr2 -> PEN DOWN .)
-
-
-state 25
-
-    (12) expr2 -> PEN COLOR . COLORVALUE
-
-    COLORVALUE      shift and go to state 28
+    END             reduce using rule 11 (expr2 -> PEN DOWN .)
 
 
 state 26
 
-    (13) expr2 -> TO NOM . expr END
-    (2) expr -> . expr expr_repeat
-    (3) expr -> . expr_repeat
-    (4) expr_repeat -> . REPEAT NUMBER LBRACKET expr RBRACKET
-    (5) expr_repeat -> . expr2
-    (6) expr2 -> . FORWARD terme
-    (7) expr2 -> . BACKWARD terme
-    (8) expr2 -> . LEFT terme
-    (9) expr2 -> . RIGHT terme
-    (10) expr2 -> . PEN UP
-    (11) expr2 -> . PEN DOWN
-    (12) expr2 -> . PEN COLOR COLORVALUE
-    (13) expr2 -> . TO NOM expr END
-    (14) expr2 -> . NOM
+    (12) expr2 -> PEN COLOR . COLORVALUE
 
-    REPEAT          shift and go to state 4
-    FORWARD         shift and go to state 6
-    BACKWARD        shift and go to state 7
-    LEFT            shift and go to state 8
-    RIGHT           shift and go to state 9
-    PEN             shift and go to state 10
-    TO              shift and go to state 11
-    NOM             shift and go to state 12
+    COLORVALUE      shift and go to state 32
 
-    expr                           shift and go to state 29
-    expr_repeat                    shift and go to state 3
-    expr2                          shift and go to state 5
 
 state 27
+
+    (13) expr2 -> TO parametres . NOM expr END
+    (15) parametres -> parametres . PARAMETRE
+
+    NOM             shift and go to state 33
+    PARAMETRE       shift and go to state 34
+
+
+state 28
+
+    (16) parametres -> empty .
+
+    NOM             reduce using rule 16 (parametres -> empty .)
+    PARAMETRE       reduce using rule 16 (parametres -> empty .)
+
+
+state 29
+
+    (14) expr2 -> NOM valeurs_parametres .
+    (19) valeurs_parametres -> valeurs_parametres . terme
+    (20) terme -> . NUMBER
+    (21) terme -> . XCOR
+    (22) terme -> . YCOR
+    (23) terme -> . HEADING
+    (24) terme -> . PARAMETRE
+
+    REPEAT          reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    FORWARD         reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    BACKWARD        reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    LEFT            reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    RIGHT           reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    PEN             reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    TO              reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    NOM             reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    $end            reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    RBRACKET        reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    END             reduce using rule 14 (expr2 -> NOM valeurs_parametres .)
+    NUMBER          shift and go to state 16
+    XCOR            shift and go to state 17
+    YCOR            shift and go to state 18
+    HEADING         shift and go to state 19
+    PARAMETRE       shift and go to state 20
+
+    terme                          shift and go to state 35
+
+state 30
+
+    (18) valeurs_parametres -> empty .
+
+    NUMBER          reduce using rule 18 (valeurs_parametres -> empty .)
+    XCOR            reduce using rule 18 (valeurs_parametres -> empty .)
+    YCOR            reduce using rule 18 (valeurs_parametres -> empty .)
+    HEADING         reduce using rule 18 (valeurs_parametres -> empty .)
+    PARAMETRE       reduce using rule 18 (valeurs_parametres -> empty .)
+    REPEAT          reduce using rule 18 (valeurs_parametres -> empty .)
+    FORWARD         reduce using rule 18 (valeurs_parametres -> empty .)
+    BACKWARD        reduce using rule 18 (valeurs_parametres -> empty .)
+    LEFT            reduce using rule 18 (valeurs_parametres -> empty .)
+    RIGHT           reduce using rule 18 (valeurs_parametres -> empty .)
+    PEN             reduce using rule 18 (valeurs_parametres -> empty .)
+    TO              reduce using rule 18 (valeurs_parametres -> empty .)
+    NOM             reduce using rule 18 (valeurs_parametres -> empty .)
+    $end            reduce using rule 18 (valeurs_parametres -> empty .)
+    RBRACKET        reduce using rule 18 (valeurs_parametres -> empty .)
+    END             reduce using rule 18 (valeurs_parametres -> empty .)
+
+
+state 31
 
     (4) expr_repeat -> REPEAT NUMBER LBRACKET . expr RBRACKET
     (2) expr -> . expr expr_repeat
@@ -503,8 +617,8 @@ state 27
     (10) expr2 -> . PEN UP
     (11) expr2 -> . PEN DOWN
     (12) expr2 -> . PEN COLOR COLORVALUE
-    (13) expr2 -> . TO NOM expr END
-    (14) expr2 -> . NOM
+    (13) expr2 -> . TO parametres NOM expr END
+    (14) expr2 -> . NOM valeurs_parametres
 
     REPEAT          shift and go to state 4
     FORWARD         shift and go to state 6
@@ -515,11 +629,11 @@ state 27
     TO              shift and go to state 11
     NOM             shift and go to state 12
 
-    expr                           shift and go to state 30
+    expr                           shift and go to state 36
     expr_repeat                    shift and go to state 3
     expr2                          shift and go to state 5
 
-state 28
+state 32
 
     (12) expr2 -> PEN COLOR COLORVALUE .
 
@@ -532,14 +646,15 @@ state 28
     TO              reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
     NOM             reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
     $end            reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
-    END             reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
     RBRACKET        reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
+    END             reduce using rule 12 (expr2 -> PEN COLOR COLORVALUE .)
 
 
-state 29
+state 33
 
-    (13) expr2 -> TO NOM expr . END
-    (2) expr -> expr . expr_repeat
+    (13) expr2 -> TO parametres NOM . expr END
+    (2) expr -> . expr expr_repeat
+    (3) expr -> . expr_repeat
     (4) expr_repeat -> . REPEAT NUMBER LBRACKET expr RBRACKET
     (5) expr_repeat -> . expr2
     (6) expr2 -> . FORWARD terme
@@ -549,10 +664,9 @@ state 29
     (10) expr2 -> . PEN UP
     (11) expr2 -> . PEN DOWN
     (12) expr2 -> . PEN COLOR COLORVALUE
-    (13) expr2 -> . TO NOM expr END
-    (14) expr2 -> . NOM
+    (13) expr2 -> . TO parametres NOM expr END
+    (14) expr2 -> . NOM valeurs_parametres
 
-    END             shift and go to state 31
     REPEAT          shift and go to state 4
     FORWARD         shift and go to state 6
     BACKWARD        shift and go to state 7
@@ -562,10 +676,41 @@ state 29
     TO              shift and go to state 11
     NOM             shift and go to state 12
 
-    expr_repeat                    shift and go to state 13
+    expr                           shift and go to state 37
+    expr_repeat                    shift and go to state 3
     expr2                          shift and go to state 5
 
-state 30
+state 34
+
+    (15) parametres -> parametres PARAMETRE .
+
+    NOM             reduce using rule 15 (parametres -> parametres PARAMETRE .)
+    PARAMETRE       reduce using rule 15 (parametres -> parametres PARAMETRE .)
+
+
+state 35
+
+    (19) valeurs_parametres -> valeurs_parametres terme .
+
+    NUMBER          reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    XCOR            reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    YCOR            reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    HEADING         reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    PARAMETRE       reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    REPEAT          reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    FORWARD         reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    BACKWARD        reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    LEFT            reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    RIGHT           reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    PEN             reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    TO              reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    NOM             reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    $end            reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    RBRACKET        reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+    END             reduce using rule 19 (valeurs_parametres -> valeurs_parametres terme .)
+
+
+state 36
 
     (4) expr_repeat -> REPEAT NUMBER LBRACKET expr . RBRACKET
     (2) expr -> expr . expr_repeat
@@ -578,10 +723,10 @@ state 30
     (10) expr2 -> . PEN UP
     (11) expr2 -> . PEN DOWN
     (12) expr2 -> . PEN COLOR COLORVALUE
-    (13) expr2 -> . TO NOM expr END
-    (14) expr2 -> . NOM
+    (13) expr2 -> . TO parametres NOM expr END
+    (14) expr2 -> . NOM valeurs_parametres
 
-    RBRACKET        shift and go to state 32
+    RBRACKET        shift and go to state 38
     REPEAT          shift and go to state 4
     FORWARD         shift and go to state 6
     BACKWARD        shift and go to state 7
@@ -594,24 +739,36 @@ state 30
     expr_repeat                    shift and go to state 13
     expr2                          shift and go to state 5
 
-state 31
+state 37
 
-    (13) expr2 -> TO NOM expr END .
+    (13) expr2 -> TO parametres NOM expr . END
+    (2) expr -> expr . expr_repeat
+    (4) expr_repeat -> . REPEAT NUMBER LBRACKET expr RBRACKET
+    (5) expr_repeat -> . expr2
+    (6) expr2 -> . FORWARD terme
+    (7) expr2 -> . BACKWARD terme
+    (8) expr2 -> . LEFT terme
+    (9) expr2 -> . RIGHT terme
+    (10) expr2 -> . PEN UP
+    (11) expr2 -> . PEN DOWN
+    (12) expr2 -> . PEN COLOR COLORVALUE
+    (13) expr2 -> . TO parametres NOM expr END
+    (14) expr2 -> . NOM valeurs_parametres
 
-    REPEAT          reduce using rule 13 (expr2 -> TO NOM expr END .)
-    FORWARD         reduce using rule 13 (expr2 -> TO NOM expr END .)
-    BACKWARD        reduce using rule 13 (expr2 -> TO NOM expr END .)
-    LEFT            reduce using rule 13 (expr2 -> TO NOM expr END .)
-    RIGHT           reduce using rule 13 (expr2 -> TO NOM expr END .)
-    PEN             reduce using rule 13 (expr2 -> TO NOM expr END .)
-    TO              reduce using rule 13 (expr2 -> TO NOM expr END .)
-    NOM             reduce using rule 13 (expr2 -> TO NOM expr END .)
-    $end            reduce using rule 13 (expr2 -> TO NOM expr END .)
-    END             reduce using rule 13 (expr2 -> TO NOM expr END .)
-    RBRACKET        reduce using rule 13 (expr2 -> TO NOM expr END .)
+    END             shift and go to state 39
+    REPEAT          shift and go to state 4
+    FORWARD         shift and go to state 6
+    BACKWARD        shift and go to state 7
+    LEFT            shift and go to state 8
+    RIGHT           shift and go to state 9
+    PEN             shift and go to state 10
+    TO              shift and go to state 11
+    NOM             shift and go to state 12
 
+    expr_repeat                    shift and go to state 13
+    expr2                          shift and go to state 5
 
-state 32
+state 38
 
     (4) expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .
 
@@ -624,6 +781,23 @@ state 32
     TO              reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
     NOM             reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
     $end            reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
-    END             reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
     RBRACKET        reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
+    END             reduce using rule 4 (expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET .)
+
+
+state 39
+
+    (13) expr2 -> TO parametres NOM expr END .
+
+    REPEAT          reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    FORWARD         reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    BACKWARD        reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    LEFT            reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    RIGHT           reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    PEN             reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    TO              reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    NOM             reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    $end            reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    RBRACKET        reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
+    END             reduce using rule 13 (expr2 -> TO parametres NOM expr END .)
 

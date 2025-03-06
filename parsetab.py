@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BACKWARD COLOR COLORVALUE DOWN END FORWARD HEADING LBRACKET LEFT NOM NUMBER PEN RBRACKET REPEAT RIGHT TO UP XCOR YCORexpression : exprexpr : expr expr_repeat\n            | expr_repeatexpr_repeat : REPEAT NUMBER LBRACKET expr RBRACKET\n            | expr2expr2 : FORWARD terme\n            | BACKWARD terme\n            | LEFT terme\n            | RIGHT terme\n            | PEN UP\n            | PEN DOWN\n            | PEN COLOR COLORVALUE\n            | TO NOM expr END\n            | NOM\n    terme : NUMBER\n            | XCOR\n            | YCOR\n            | HEADING\n    '
+_lr_signature = 'BACKWARD COLOR COLORVALUE DOWN END FORWARD HEADING LBRACKET LEFT NOM NUMBER PARAMETRE PEN RBRACKET REPEAT RIGHT TO UP XCOR YCORexpression : exprexpr : expr expr_repeat\n            | expr_repeatexpr_repeat : REPEAT NUMBER LBRACKET expr RBRACKET\n            | expr2expr2 : FORWARD terme\n            | BACKWARD terme\n            | LEFT terme\n            | RIGHT terme\n            | PEN UP\n            | PEN DOWN\n            | PEN COLOR COLORVALUE\n            | TO parametres NOM expr END\n            | NOM valeurs_parametres\n    parametres : parametres PARAMETRE\n            | empty\n    empty :valeurs_parametres : empty\n            | valeurs_parametres terme\n    terme : NUMBER\n            | XCOR\n            | YCOR\n            | HEADING\n            | PARAMETRE\n    '
     
-_lr_action_items = {'REPEAT':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,],[4,4,-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,4,4,-12,4,4,-13,-4,]),'FORWARD':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,],[6,6,-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,6,6,-12,6,6,-13,-4,]),'BACKWARD':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,],[7,7,-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,7,7,-12,7,7,-13,-4,]),'LEFT':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,],[8,8,-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,8,8,-12,8,8,-13,-4,]),'RIGHT':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,],[9,9,-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,9,9,-12,9,9,-13,-4,]),'PEN':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,],[10,10,-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,10,10,-12,10,10,-13,-4,]),'TO':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,],[11,11,-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,11,11,-12,11,11,-13,-4,]),'NOM':([0,2,3,5,11,12,13,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,],[12,12,-3,-5,26,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,12,12,-12,12,12,-13,-4,]),'$end':([1,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,28,31,32,],[0,-1,-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,-12,-13,-4,]),'END':([3,5,12,13,15,16,17,18,19,20,21,22,23,24,28,29,31,32,],[-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,-12,31,-13,-4,]),'RBRACKET':([3,5,12,13,15,16,17,18,19,20,21,22,23,24,28,30,31,32,],[-3,-5,-14,-2,-6,-15,-16,-17,-18,-7,-8,-9,-10,-11,-12,32,-13,-4,]),'NUMBER':([4,6,7,8,9,],[14,16,16,16,16,]),'XCOR':([6,7,8,9,],[17,17,17,17,]),'YCOR':([6,7,8,9,],[18,18,18,18,]),'HEADING':([6,7,8,9,],[19,19,19,19,]),'UP':([10,],[23,]),'DOWN':([10,],[24,]),'COLOR':([10,],[25,]),'LBRACKET':([14,],[27,]),'COLORVALUE':([25,],[28,]),}
+_lr_action_items = {'REPEAT':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,31,32,33,35,36,37,38,39,],[4,4,-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,4,-12,4,-19,4,4,-4,-13,]),'FORWARD':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,31,32,33,35,36,37,38,39,],[6,6,-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,6,-12,6,-19,6,6,-4,-13,]),'BACKWARD':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,31,32,33,35,36,37,38,39,],[7,7,-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,7,-12,7,-19,7,7,-4,-13,]),'LEFT':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,31,32,33,35,36,37,38,39,],[8,8,-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,8,-12,8,-19,8,8,-4,-13,]),'RIGHT':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,31,32,33,35,36,37,38,39,],[9,9,-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,9,-12,9,-19,9,9,-4,-13,]),'PEN':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,31,32,33,35,36,37,38,39,],[10,10,-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,10,-12,10,-19,10,10,-4,-13,]),'TO':([0,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,31,32,33,35,36,37,38,39,],[11,11,-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,11,-12,11,-19,11,11,-4,-13,]),'NOM':([0,2,3,5,11,12,13,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,],[12,12,-3,-5,-17,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,33,-16,-14,-18,12,-12,12,-15,-19,12,12,-4,-13,]),'$end':([1,2,3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,32,35,38,39,],[0,-1,-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,-12,-19,-4,-13,]),'RBRACKET':([3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,32,35,36,38,39,],[-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,-12,-19,38,-4,-13,]),'END':([3,5,12,13,15,16,17,18,19,20,21,22,23,24,25,29,30,32,35,37,38,39,],[-3,-5,-17,-2,-6,-20,-21,-22,-23,-24,-7,-8,-9,-10,-11,-14,-18,-12,-19,39,-4,-13,]),'NUMBER':([4,6,7,8,9,12,16,17,18,19,20,29,30,35,],[14,16,16,16,16,-17,-20,-21,-22,-23,-24,16,-18,-19,]),'XCOR':([6,7,8,9,12,16,17,18,19,20,29,30,35,],[17,17,17,17,-17,-20,-21,-22,-23,-24,17,-18,-19,]),'YCOR':([6,7,8,9,12,16,17,18,19,20,29,30,35,],[18,18,18,18,-17,-20,-21,-22,-23,-24,18,-18,-19,]),'HEADING':([6,7,8,9,12,16,17,18,19,20,29,30,35,],[19,19,19,19,-17,-20,-21,-22,-23,-24,19,-18,-19,]),'PARAMETRE':([6,7,8,9,11,12,16,17,18,19,20,27,28,29,30,34,35,],[20,20,20,20,-17,-17,-20,-21,-22,-23,-24,34,-16,20,-18,-15,-19,]),'UP':([10,],[24,]),'DOWN':([10,],[25,]),'COLOR':([10,],[26,]),'LBRACKET':([14,],[31,]),'COLORVALUE':([26,],[32,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,],[1,]),'expr':([0,26,27,],[2,29,30,]),'expr_repeat':([0,2,26,27,29,30,],[3,13,3,3,13,13,]),'expr2':([0,2,26,27,29,30,],[5,5,5,5,5,5,]),'terme':([6,7,8,9,],[15,20,21,22,]),}
+_lr_goto_items = {'expression':([0,],[1,]),'expr':([0,31,33,],[2,36,37,]),'expr_repeat':([0,2,31,33,36,37,],[3,13,3,3,13,13,]),'expr2':([0,2,31,33,36,37,],[5,5,5,5,5,5,]),'terme':([6,7,8,9,29,],[15,21,22,23,35,]),'parametres':([11,],[27,]),'empty':([11,12,],[28,30,]),'valeurs_parametres':([12,],[29,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,22 +27,28 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expr','expression',1,'p_expression','logo.py',117),
-  ('expr -> expr expr_repeat','expr',2,'p_expr','logo.py',123),
-  ('expr -> expr_repeat','expr',1,'p_expr','logo.py',124),
-  ('expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET','expr_repeat',5,'p_expr_repeat','logo.py',132),
-  ('expr_repeat -> expr2','expr_repeat',1,'p_expr_repeat','logo.py',133),
-  ('expr2 -> FORWARD terme','expr2',2,'p_expr2','logo.py',143),
-  ('expr2 -> BACKWARD terme','expr2',2,'p_expr2','logo.py',144),
-  ('expr2 -> LEFT terme','expr2',2,'p_expr2','logo.py',145),
-  ('expr2 -> RIGHT terme','expr2',2,'p_expr2','logo.py',146),
-  ('expr2 -> PEN UP','expr2',2,'p_expr2','logo.py',147),
-  ('expr2 -> PEN DOWN','expr2',2,'p_expr2','logo.py',148),
-  ('expr2 -> PEN COLOR COLORVALUE','expr2',3,'p_expr2','logo.py',149),
-  ('expr2 -> TO NOM expr END','expr2',4,'p_expr2','logo.py',150),
-  ('expr2 -> NOM','expr2',1,'p_expr2','logo.py',151),
-  ('terme -> NUMBER','terme',1,'p_terme','logo.py',178),
-  ('terme -> XCOR','terme',1,'p_terme','logo.py',179),
-  ('terme -> YCOR','terme',1,'p_terme','logo.py',180),
-  ('terme -> HEADING','terme',1,'p_terme','logo.py',181),
+  ('expression -> expr','expression',1,'p_expression','logo.py',125),
+  ('expr -> expr expr_repeat','expr',2,'p_expr','logo.py',131),
+  ('expr -> expr_repeat','expr',1,'p_expr','logo.py',132),
+  ('expr_repeat -> REPEAT NUMBER LBRACKET expr RBRACKET','expr_repeat',5,'p_expr_repeat','logo.py',140),
+  ('expr_repeat -> expr2','expr_repeat',1,'p_expr_repeat','logo.py',141),
+  ('expr2 -> FORWARD terme','expr2',2,'p_expr2','logo.py',151),
+  ('expr2 -> BACKWARD terme','expr2',2,'p_expr2','logo.py',152),
+  ('expr2 -> LEFT terme','expr2',2,'p_expr2','logo.py',153),
+  ('expr2 -> RIGHT terme','expr2',2,'p_expr2','logo.py',154),
+  ('expr2 -> PEN UP','expr2',2,'p_expr2','logo.py',155),
+  ('expr2 -> PEN DOWN','expr2',2,'p_expr2','logo.py',156),
+  ('expr2 -> PEN COLOR COLORVALUE','expr2',3,'p_expr2','logo.py',157),
+  ('expr2 -> TO parametres NOM expr END','expr2',5,'p_expr2','logo.py',158),
+  ('expr2 -> NOM valeurs_parametres','expr2',2,'p_expr2','logo.py',159),
+  ('parametres -> parametres PARAMETRE','parametres',2,'p_parametres','logo.py',186),
+  ('parametres -> empty','parametres',1,'p_parametres','logo.py',187),
+  ('empty -> <empty>','empty',0,'p_empty','logo.py',195),
+  ('valeurs_parametres -> empty','valeurs_parametres',1,'p_valeurs_parametres','logo.py',199),
+  ('valeurs_parametres -> valeurs_parametres terme','valeurs_parametres',2,'p_valeurs_parametres','logo.py',200),
+  ('terme -> NUMBER','terme',1,'p_terme','logo.py',208),
+  ('terme -> XCOR','terme',1,'p_terme','logo.py',209),
+  ('terme -> YCOR','terme',1,'p_terme','logo.py',210),
+  ('terme -> HEADING','terme',1,'p_terme','logo.py',211),
+  ('terme -> PARAMETRE','terme',1,'p_terme','logo.py',212),
 ]
