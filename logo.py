@@ -188,14 +188,12 @@ def p_expr2(p):
             dict_parametres = {}
             for i in range(len(procedures[p[1]].parametres)):
                 dict_parametres[procedures[p[1]].parametres[i].nom] = p[2][i]
-            # p[0] = [instr for instr in procedures[p[1]].instructions]
 
             p[0] = []
             for instr in procedures[p[1]].instructions:
-                p[0].append(deepcopy(instr))
-            for i in range(len(procedures[p[1]].parametres)):
-                for instr in p[0]:
-                    instr.replace_parametre(dict_parametres)
+                copied_instr = deepcopy(instr)
+                copied_instr.replace_parametre(deepcopy(dict_parametres))  # Remplacement des paramètres
+                p[0].append(copied_instr)
     else:
         print("Procedure inconnue")
         p[0] = []
