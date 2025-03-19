@@ -6,3 +6,6 @@ class IntValue(Negated):
     
     def value(self, turtle):
         return self.sign*self.coord
+    
+    def __str__(self):
+        return f"IntValue({self.sign*self.coord})"

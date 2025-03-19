@@ -7,3 +7,7 @@ class Instruction:
     @abstractmethod
     def code(self):
         pass
+
+    @abstractmethod
+    def replace_parametre(self, turtle):
+        pass

@@ -7,3 +7,6 @@ class Heading(Negated):
     def value(self, turtle):
         direction = turtle.angle
         return self.sign*direction
+    
+    def __str__(self):
+        return f"Heading({self.sign*direction})"

@@ -7,3 +7,6 @@ class Ycor(Negated):
     def value(self, turtle):
         y = turtle.y
         return self.sign*y
+    
+    def __str__(self):
+        return f"Ycor({self.sign*turtle.y})"

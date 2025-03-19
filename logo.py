@@ -38,7 +38,7 @@ reserved = {
 tokens = [
     'NUMBER',
     'COLORVALUE',
-    'NOM',
+    'NOMPROCEDURE',
     'LBRACKET',
     'RBRACKET',
     'PARAMETRE'
@@ -49,7 +49,7 @@ tokens = [
 # grammaire
 t_RBRACKET = r'\]'
 t_LBRACKET = r'\['
-t_PARAMETRE = r':[a-zA-Z_0-9]+'
+t_PARAMETRE = r'\:[a-zA-Z_0-9]+'
 
 def t_NUMBER(t):
     r'-?[0-9]+' # on peut aussi écrire r'\d+'
@@ -66,9 +66,9 @@ def t_COLORVALUE(t):
     # t.value = t.value[1:] # on enlève le premier caractère
     return t
 
-def t_NOM(t):
+def t_NOMPROCEDURE(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reserved.get(t.value, 'NOM') # on regarde si c'est un mot réservé, sinon on met 'NOM' à la place
+    t.type = reserved.get(t.value, 'NOMPROCEDURE') # on regarde si c'est un mot réservé, sinon on met 'NOMPROCEDURE' à la place
     return t
 
 # caractères à ignorer: ici espaces, tabulations, saut de lignes
@@ -131,8 +131,6 @@ def p_expr(p):
     '''expr : expr expr_repeat
             | expr_repeat'''
     if len(p) == 3:
-        print(p[1])
-        print(p[2])
         p[0] = p[1] + p[2]
     else:
         p[0] = p[1]
@@ -157,8 +155,8 @@ def p_expr2(p):
             | PEN UP
             | PEN DOWN
             | PEN COLOR COLORVALUE
-            | TO parametres NOM expr END
-            | NOM valeurs_parametres
+            | TO NOMPROCEDURE parametres expr END
+            | NOMPROCEDURE valeurs_parametres
     '''
     global procedures
     if p[1] == 'forward':
@@ -176,18 +174,39 @@ def p_expr2(p):
             p[0] = [SetPen(turtle, True)]
         elif p[2] == 'color':
             p[0] = [PenColor(turtle, p[3])]
-    elif p[1] == 'to' and p[3] not in procedures and p[3] not in reserved and p[5] == 'end':
-        procedures[p[3]] = Procedure(p[3], p[2], p[4])
+    elif p[1] == 'to' and p[2] not in procedures and p[2] not in reserved and p[5] == 'end':
+        procedures[p[2]] = Procedure(p[2], p[3], p[4])
         p[0] = []
     elif p[1] in procedures:
-        print("Procedure name : ")
-        print(p[1])
-        p[0] = procedures[p[1]].instructions
+        # print("Procedure instrctions : ")
+        # print(procedures[p[1]].instructions)
+        # print("Procedure parametres : ")
+        # print(procedures[p[1]].parametres)
+        # print("Valeurs parametres : ")
+        # print(p[2])
+        # p[0] = procedures[p[1]].instructions
+        if len(procedures[p[1]].parametres) != len(p[2]):
+            print("Nombre de parametres incorrect")
+        else:
+            dict_parametres = {}
+            for i in range(len(procedures[p[1]].parametres)):
+                dict_parametres[procedures[p[1]].parametres[i].nom] = p[2][i]
+            
+            p[0] = []
+            for instr in procedures[p[1]].instructions:
+                p[0].append(instr)
+            for i in range(len(procedures[p[1]].parametres)):
+                for instr in p[0]:
+                    instr.replace_parametre(dict_parametres)
+                    print("Instruction : ")
+                    print(instr)
+                    print("")
     else:
+        print("Procedure inconnue")
         p[0] = []
 
 def p_parametres(p):
-    '''parametres : parametres PARAMETRE
+    '''parametres : parametres terme
             | empty
     '''
     if p[1] == None:
