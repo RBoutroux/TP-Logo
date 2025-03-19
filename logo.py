@@ -188,7 +188,8 @@ def p_expr2(p):
             dict_parametres = {}
             for i in range(len(procedures[p[1]].parametres)):
                 dict_parametres[procedures[p[1]].parametres[i].nom] = p[2][i]
-            
+            # p[0] = [instr for instr in procedures[p[1]].instructions]
+
             p[0] = []
             for instr in procedures[p[1]].instructions:
                 p[0].append(deepcopy(instr))

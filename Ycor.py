@@ -11,4 +11,4 @@ class Ycor(Negated):
         return self.sign*y
     
     def __str__(self):
-        return f"Ycor({self.sign*turtle.y})"
+        return f"Ycor({self.sign})"

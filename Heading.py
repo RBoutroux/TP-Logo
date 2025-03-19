@@ -7,8 +7,8 @@ class Heading(Negated):
         self.direction = 0
     
     def value(self, turtle):
-        direction = turtle.angle
-        return self.sign*direction
+        self.direction = turtle.angle
+        return self.sign*self.direction
     
     def __str__(self):
-        return f"Heading({self.sign*direction})"
+        return f"Heading({self.sign})"
