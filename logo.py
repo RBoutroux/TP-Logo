@@ -15,6 +15,7 @@ from Ycor import Ycor
 from Value import IntValue
 from Parametre import Parametre
 from Procedure import Procedure
+from copy import deepcopy
 
 #-------------------------------------------------------------------------------
 # analyse lexicale
@@ -194,7 +195,7 @@ def p_expr2(p):
             
             p[0] = []
             for instr in procedures[p[1]].instructions:
-                p[0].append(instr)
+                p[0].append(deepcopy(instr))
             for i in range(len(procedures[p[1]].parametres)):
                 for instr in p[0]:
                     instr.replace_parametre(dict_parametres)

@@ -1,4 +1,6 @@
 from Negated import Negated
+from copy import deepcopy
+
 class Parametre(Negated):
     def __init__(self, nom):
         super().__init__()

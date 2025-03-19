@@ -1,4 +1,6 @@
 from Negated import Negated
+from copy import deepcopy
+
 class IntValue(Negated): 
     def __init__(self, coord):
         super().__init__()

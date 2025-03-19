@@ -1,5 +1,6 @@
 from instruction import Instruction
 from Parametre import Parametre
+from copy import deepcopy
 
 class PenColor(Instruction):
     def __init__(self, turtle, color):
@@ -15,3 +16,8 @@ class PenColor(Instruction):
     
     def __str__(self):
         return f"PenColor({self.color})"
+    
+    # def __deepcopy__(self, memo):
+    #     new_instance = super().__deepcopy__(memo)
+    #     new_instance.color = deepcopy(self.color)
+    #     return new_instance

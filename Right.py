@@ -1,5 +1,6 @@
 from instruction import Instruction
 from Parametre import Parametre
+from copy import deepcopy
 
 class Right(Instruction):
     def __init__(self, turtle, angle):
@@ -15,3 +16,8 @@ class Right(Instruction):
 
     def __str__(self):
         return f"Right({self.angle})"
+    
+    # def __deepcopy__(self, memo):
+    #     new_instance = super().__deepcopy__(memo)
+    #     new_instance.angle = deepcopy(self.angle)
+    #     return new_instance

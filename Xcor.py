@@ -1,4 +1,6 @@
 from Negated import Negated
+from copy import deepcopy
+
 class Xcor(Negated):
     def __init__(self):
         super().__init__()

@@ -1,5 +1,6 @@
 from instruction import Instruction
 from Parametre import Parametre
+from copy import deepcopy
 
 class Forward(Instruction):
     def __init__(self, turtle, distance):
@@ -15,3 +16,8 @@ class Forward(Instruction):
 
     def __str__(self):
         return f"Forward({self.distance})"
+    
+    # def __deepcopy__(self, memo):
+    #     new_instance = super().__deepcopy__(memo)
+    #     new_instance.distance = deepcopy(self.distance)
+    #     return new_instance
