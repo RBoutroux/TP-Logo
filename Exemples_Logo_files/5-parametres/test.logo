@@ -1,0 +1,24 @@
+to colored_ray :y
+    right 90
+    forward :y
+end
+
+to ray :y 
+    colored_ray :y
+end
+
+pen down
+
+ray 40
+pen color #ff0000
+ray 40
+pen color #ffF001
+ray 50
+pen color #ff0000
+ray 60
+pen color #ffF001
+ray 70
+pen color #ff0000
+ray 80
+pen color #ffF001
+ray 90

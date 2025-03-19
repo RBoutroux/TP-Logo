@@ -126,6 +126,9 @@ def p_expression(p):
     '''expression : expr'''
     # une expression à calculer
     for instr in p[1]:
+        print("Instruction : ")
+        print(instr)
+        print("")
         instr.code()
 
 def p_expr(p):
@@ -179,13 +182,6 @@ def p_expr2(p):
         procedures[p[2]] = Procedure(p[2], p[3], p[4])
         p[0] = []
     elif p[1] in procedures:
-        # print("Procedure instrctions : ")
-        # print(procedures[p[1]].instructions)
-        # print("Procedure parametres : ")
-        # print(procedures[p[1]].parametres)
-        # print("Valeurs parametres : ")
-        # print(p[2])
-        # p[0] = procedures[p[1]].instructions
         if len(procedures[p[1]].parametres) != len(p[2]):
             print("Nombre de parametres incorrect")
         else:
@@ -199,9 +195,6 @@ def p_expr2(p):
             for i in range(len(procedures[p[1]].parametres)):
                 for instr in p[0]:
                     instr.replace_parametre(dict_parametres)
-                    print("Instruction : ")
-                    print(instr)
-                    print("")
     else:
         print("Procedure inconnue")
         p[0] = []

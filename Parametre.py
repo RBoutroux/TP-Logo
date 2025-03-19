@@ -12,4 +12,4 @@ class Parametre(Negated):
         return dict[self.nom]
 
     def __str__(self):
-        return f"Parametre({self.nom})"
+        return f"Parametre({self.sign}{self.nom})"
