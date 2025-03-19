@@ -131,6 +131,8 @@ def p_expr(p):
     '''expr : expr expr_repeat
             | expr_repeat'''
     if len(p) == 3:
+        print(p[1])
+        print(p[2])
         p[0] = p[1] + p[2]
     else:
         p[0] = p[1]
@@ -175,10 +177,12 @@ def p_expr2(p):
         elif p[2] == 'color':
             p[0] = [PenColor(turtle, p[3])]
     elif p[1] == 'to' and p[3] not in procedures and p[3] not in reserved and p[5] == 'end':
-        procedures[p[3]] = Procedure(p[4], p[2], p[4])
+        procedures[p[3]] = Procedure(p[3], p[2], p[4])
         p[0] = []
     elif p[1] in procedures:
-        p[0] = procedures[p[1]].name
+        print("Procedure name : ")
+        print(p[1])
+        p[0] = procedures[p[1]].instructions
     else:
         p[0] = []
 
@@ -197,7 +201,7 @@ def p_empty(p):
 
 def p_valeurs_parametres(p):
     '''valeurs_parametres : empty
-            | valeurs_parametres terme
+                        | valeurs_parametres terme
     '''
     if p[1] == None:
         p[0] = []
